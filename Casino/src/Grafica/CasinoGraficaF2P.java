@@ -51,7 +51,7 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
         jBReg = new javax.swing.JButton();
         jBJugar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -126,11 +126,12 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(100, 160, 520, 280);
+        jPanel1.setBounds(110, 180, 520, 280);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Desktop\\partouche-casino-eden-juan-les-pins-hotel.jpeg")); // NOI18N
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 0, 820, 520);
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Documents\\NetBeansProjects\\casino\\Casino\\src\\resources\\Juegos\\partouche-casino-eden-juan-les-pins-hotel.jpeg")); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 740, 520);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -233,9 +234,9 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
     private javax.swing.JButton jBLogin;
     private javax.swing.JButton jBReg;
     private javax.swing.JButton jBSalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
