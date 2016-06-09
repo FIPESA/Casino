@@ -7,9 +7,12 @@ package Grafica;
 
 import Casino.Casino;
 import ConexionBD.OperacionesSQL;
+import Exceptions.UserReadingException;
 import Usuarios.P2W;
 import Usuarios.User;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -314,7 +317,16 @@ public class AdminGrafico extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        try {
+            User a = OperacionesSQL.instancia().leerUsuario(jTable1.getValueAt(row, 0).toString());
+            DatosUserAdmin dua = new DatosUserAdmin(this, true, a);
+            dua.setVisible(true);
+            mostrar();
+        } catch (UserReadingException ex) {
+            System.out.println("patata");
+        }
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

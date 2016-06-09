@@ -271,8 +271,7 @@ public class DatosUserAdmin extends javax.swing.JDialog {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if(a instanceof P2WSS){
             try {
-                P2WSS b = (P2WSS) a;
-                
+                P2WSS b = (P2WSS) a;                
                 b.setPass(jTextField2.getText());
                 b.setName(jTextField3.getText());
                 b.setLName1(jTextField4.getText());
@@ -287,8 +286,7 @@ public class DatosUserAdmin extends javax.swing.JDialog {
                 Logger.getLogger(DatosUserAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if(a instanceof P2W){
-            P2W b = (P2W) a;
-            
+            P2W b = (P2W) a;            
             b.setPass(jTextField2.getText());
             b.setName(jTextField3.getText());
             b.setLName1(jTextField4.getText());
@@ -299,9 +297,8 @@ public class DatosUserAdmin extends javax.swing.JDialog {
             b.setAceptado(jCheckBox1.isSelected());
             OperacionesSQL.instancia().actualizarUsuario(b);
         } else if(a instanceof Admin){
-            Admin b = (Admin) a;
-            
-            b.setpass(jTextField2.getText());
+            Admin b = (Admin) a;            
+            b.setPass(jTextField2.getText());
             b.setMonedero(new Monedero(Double.parseDouble(jTextField8.getText())));
             OperacionesSQL.instancia().actualizarUsuario(b);
         }

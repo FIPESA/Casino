@@ -165,6 +165,34 @@ public class OperacionesSQL {
     }
     
     /**
+     * Recupera de la base de datos un usuario mediante su username 
+     * @param usrname username
+     * @return el usuario ya instanciado
+     * @throws UserReadingException si el usuario no existe
+     */
+    public User leerUsuario (String usrname) throws UserReadingException{
+        User a = null;
+        try{
+            ResultSet rs = ConexionBD.instancia().getStatement().executeQuery("Select * from Usuarios where Username='"+usrname+"'");
+            if(rs.next()){
+                if(rs.getInt(10) == 1){
+                    a = new P2W(rs.getString(1), rs.getString(2), new Monedero(rs.getDouble(11)), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(7), rs.getTimestamp(6), rs.getDouble(8), rs.getDate(12), rs.getBoolean(9));
+                }else if(rs.getInt(10) == 2){
+                    a = new P2WSS (rs.getString(1), rs.getString(2), new Monedero(rs.getDouble(11)), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(7), rs.getTimestamp(6), rs.getDouble(8), rs.getDate(12), rs.getDate(13), rs.getBoolean(9));
+                }else if(rs.getInt(10) == 3){
+                    a = new Admin(rs.getString(1), rs.getString(2));
+                }
+            } else{
+                throw new UserReadingException("El usuario no existe");
+            }
+                    
+        }catch(SQLException e){
+            System.out.println("Patata");
+        }       
+        return a;
+    }
+    
+    /**
      * Metodo que actualiza la informacion de un user en la base de datos
      * @param usuario 
      */
