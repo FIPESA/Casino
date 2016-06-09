@@ -347,10 +347,14 @@ public class Admin extends User{
 
     public String getPass() {
         return Pass;
+        
+    }
+
+    public void setPass(String Pass) {
+        this.Pass = Pass;
     }
     
-    
-    
+        
     
     
     
