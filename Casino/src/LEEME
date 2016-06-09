@@ -1,0 +1,11 @@
+Archivo para comentar cosas
+
+Añadir seguridad el metodo de logeo
+
+Redactar el eula
+
+Comprobar tablas jugadas en la bd
+
+el sql.Date no devuelve Horas, minutos y segundos, problema de la base de datos
+o guardamos un float o un timestamp(esta preferentemente, se pude sacar el valor long para el Date)
+ - Arreglado
