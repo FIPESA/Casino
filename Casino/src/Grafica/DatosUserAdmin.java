@@ -301,7 +301,7 @@ public class DatosUserAdmin extends javax.swing.JDialog {
         } else if(a instanceof Admin){
             Admin b = (Admin) a;
             
-            b.setPass(jTextField2.getText());
+            b.setpass(jTextField2.getText());
             b.setMonedero(new Monedero(Double.parseDouble(jTextField8.getText())));
             OperacionesSQL.instancia().actualizarUsuario(b);
         }
