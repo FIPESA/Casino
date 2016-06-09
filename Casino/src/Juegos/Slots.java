@@ -8,8 +8,7 @@ package Juegos;
 import java.util.*;
 
 
-public class Slots{
-    
+public class Slots{  
     public final static int CANTIDAD_NUMEROS = 9;
     public final static int TRIPLESIETE = 1;
     public final static int PLATANO = 2;
@@ -20,6 +19,10 @@ public class Slots{
     public final static int NARANJA = 7;
     public final static int UVA = 8;
     public final static int CEREZA = 9;
+    
+    public final static Frutas[] ROLLO1 = {};
+    public final static Frutas[] ROLLO2 = {};
+    public final static Frutas[] ROLLO3 = {};
     
     private int resultado1;
     private int resultado2;
