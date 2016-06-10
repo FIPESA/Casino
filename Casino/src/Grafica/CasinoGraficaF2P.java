@@ -51,6 +51,7 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
         jBReg = new javax.swing.JButton();
         jBJugar = new javax.swing.JButton();
         jBSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,6 +133,12 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
 
         jPanel2.add(jPanel1);
         jPanel1.setBounds(130, 230, 520, 280);
+
+        jLabel2.setFont(new java.awt.Font("Tempus Sans ITC", 3, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 204, 0));
+        jLabel2.setText("F2P");
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(360, 150, 70, 100);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/fondof2p.png"))); // NOI18N
         jPanel2.add(jLabel1);
@@ -256,6 +263,7 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
     private javax.swing.JButton jBReg;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
