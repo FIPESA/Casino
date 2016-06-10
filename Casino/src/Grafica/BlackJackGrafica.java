@@ -50,7 +50,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         blacky = new JugarBlackJack(fipesa.getUsuario());
         setLocationRelativeTo(null);
         setResizable(false);
-        User usuario = fipesa.getUsuario();
+        usuario = fipesa.getUsuario();
         this.root = root;
 
         //botonazo = new JButton ("mierda");
