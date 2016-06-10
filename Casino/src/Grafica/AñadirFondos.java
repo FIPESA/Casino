@@ -9,6 +9,7 @@ import Exceptions.TransaccionIncorrecta;
 import Usuarios.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,12 +18,14 @@ import javax.swing.JOptionPane;
  */
 public class AñadirFondos extends javax.swing.JDialog {
     User usuario;
-   
     
     
-    public AñadirFondos(java.awt.Frame parent, boolean modal) {
+    
+    public AñadirFondos(java.awt.Frame parent, boolean modal, User usuario) {
         super(parent, modal);
         initComponents();
+        this.usuario = usuario;
+        
     }
 
     /**
@@ -152,7 +155,8 @@ public class AñadirFondos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        hide();
+        this.setVisible(false);
+        
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jtfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCantidadActionPerformed
@@ -163,9 +167,11 @@ public class AñadirFondos extends javax.swing.JDialog {
         try {
             usuario.añadirFondos(Double.parseDouble(jtfCantidad.getText()));
         } catch (TransaccionIncorrecta ex) {
-            Logger.getLogger(AñadirFondos.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", WIDTH);
+            jtfCantidad.setText("");
         } catch (NumberFormatException exn){
-            
+            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", WIDTH);
+            jtfCantidad.setText("");
         }
     }//GEN-LAST:event_jbIngresarMouseClicked
 
@@ -199,7 +205,7 @@ public class AñadirFondos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AñadirFondos dialog = new AñadirFondos(new javax.swing.JFrame(), true);
+                AñadirFondos dialog = new AñadirFondos(null, false, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

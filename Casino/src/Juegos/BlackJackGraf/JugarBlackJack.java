@@ -34,7 +34,7 @@ public class JugarBlackJack {
         
     }
     
-    public void logicaCrupier (){
+    public int logicaCrupier (){
         int ganador = 100;
         boolean banderaC = true;
         while (banderaC) {
@@ -88,6 +88,7 @@ public class JugarBlackJack {
             System.out.println("Gana la banca. Con esta mano: \n" + getBj().mostrarCartasP(getBj().getManoC()) + " que suma: \n " + getBj().contarCartas(getBj().getManoC()) + "\nLa tuya era esta: \n" + getBj().mostrarCartasP(getBj().getManoP()) + "Y suman:\n" + getBj().contarCartas(getBj().getManoP()) + "\nSorry :)");
             System.out.println("**********************************************************");
         }
+        return ganador;
     }
     
 

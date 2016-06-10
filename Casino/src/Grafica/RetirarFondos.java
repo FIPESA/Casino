@@ -180,7 +180,7 @@ public class RetirarFondos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RetirarFondos dialog = new RetirarFondos(new javax.swing.JFrame(), true);
+                RetirarFondos dialog = new RetirarFondos(null, true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

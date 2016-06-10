@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -519,15 +520,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                 apu = "";
                 jDialogGanador.setVisible(true);
                 hecho = false;
-                try {
-                    usuario.añadirFondos(apuesta);
-                    usuario.añadirFondos(apuesta * ganador / 100);
-                    actualizarValorD();
-                    apuesta = 0;
-                } catch (TransaccionIncorrecta ex) {
-                    jDialogTransaccionIncorrecta.setVisible(true);
-                }
-
+                
                 //SI TIENE 17 O MENOS PIDE CARTA
             } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) < 17) {
                 repartirCartasC();

@@ -272,14 +272,14 @@ public class VerMonedero extends javax.swing.JFrame {
 
     private void jbAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAñadirActionPerformed
      
-        AñadirFondos an = new AñadirFondos(root, true);
+        AñadirFondos an = new AñadirFondos(root, true,fipesa.getUsuario());
         an.setVisible(true);
                 
     }//GEN-LAST:event_jbAñadirActionPerformed
 
     private void jbRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetirarActionPerformed
        
-        RetirarFondos rt = new RetirarFondos(root, true);
+        RetirarFondos rt = new RetirarFondos(root, true,fipesa.getUsuario());
         rt.setVisible(true);
         
     }//GEN-LAST:event_jbRetirarActionPerformed
