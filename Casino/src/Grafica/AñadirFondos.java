@@ -165,7 +165,7 @@ public class AñadirFondos extends javax.swing.JDialog {
         } catch (TransaccionIncorrecta ex) {
             Logger.getLogger(AñadirFondos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NumberFormatException exn){
-            JOptionPane()
+            
         }
     }//GEN-LAST:event_jbIngresarMouseClicked
 

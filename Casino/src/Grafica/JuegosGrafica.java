@@ -8,7 +8,7 @@ package Grafica;
 import Casino.Casino;
 import Juegos.BlackJackGraf.JugarBlackJack;
 import Usuarios.F2P;
-import Usuarios.User;
+import Usuarios.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -23,8 +23,8 @@ public class JuegosGrafica extends javax.swing.JFrame {
     private Casino fipesa;
     private JFrame root;
     private ImageIcon f2p = new ImageIcon(getClass().getResource("/resources/imagenesusers/f2pedit.png"));
-    //private ImageIcon p2w = new ImageIcon(getClass().getResource("/resources/imagenesusers/p2wedit.png"));
-   // private ImageIcon p2wss = new ImageIcon(getClass().getResource("/resources/imagenesusers/p2wssedit.png"));
+    private ImageIcon p2w = new ImageIcon(getClass().getResource("/resources/imagenesusers/p2wedit.png"));
+    private ImageIcon p2wss = new ImageIcon(getClass().getResource("/resources/imagenesusers/p2wssedit.png"));
     
     
     public JuegosGrafica(Casino fipesa,JFrame root) {
@@ -35,7 +35,20 @@ public class JuegosGrafica extends javax.swing.JFrame {
         this.root = root;
         jTextField1.setText(fipesa.getUsuario().getUsername());
         jTextField2.setText(Double.toString(fipesa.getUsuario().getMonedero().getFondos()));
-        jLabel5.setIcon(f2p);
+        if(fipesa.getUsuario() instanceof P2WSS){
+            jLabel5.setIcon(p2wss);
+        }else if(fipesa.getUsuario() instanceof P2W){
+            jLabel5.setIcon(p2w);
+        }else if(fipesa.getUsuario() instanceof F2P){
+            jLabel5.setIcon(f2p);
+        }
+        
+    }
+    
+    @Override
+    public void setVisible(boolean a){
+        super.setVisible(a);
+        jTextField2.setText(Double.toString(fipesa.getUsuario().getMonedero().getFondos()));
     }
 
     /**
@@ -83,24 +96,33 @@ public class JuegosGrafica extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBrul);
-        jBrul.setBounds(220, 180, 80, 80);
+        jBrul.setBounds(570, 270, 80, 80);
 
+        jBBj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/black.png"))); // NOI18N
+        jBBj.setBorder(null);
+        jBBj.setContentAreaFilled(false);
+        jBBj.setFocusPainted(false);
         jBBj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBjActionPerformed(evt);
             }
         });
         jPanel1.add(jBBj);
-        jBBj.setBounds(330, 180, 80, 60);
+        jBBj.setBounds(300, 190, 160, 159);
 
+        jBSlots.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/slots.png"))); // NOI18N
         jBSlots.setText("SLOTS");
+        jBSlots.setBorder(null);
+        jBSlots.setBorderPainted(false);
+        jBSlots.setContentAreaFilled(false);
+        jBSlots.setFocusPainted(false);
         jBSlots.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSlotsActionPerformed(evt);
             }
         });
         jPanel1.add(jBSlots);
-        jBSlots.setBounds(120, 180, 80, 90);
+        jBSlots.setBounds(90, 280, 140, 170);
 
         jBatras.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jBatras.setText("Atrás");
@@ -111,7 +133,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBatras);
-        jBatras.setBounds(30, 440, 80, 60);
+        jBatras.setBounds(20, 520, 80, 60);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255, 200));
 
@@ -231,8 +253,9 @@ public class JuegosGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_jBatrasActionPerformed
 
     private void jBBjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBjActionPerformed
-        BlackJackGrafica blacky = new BlackJackGrafica(fipesa.getUsuario());      
+        BlackJackGrafica blacky = new BlackJackGrafica(fipesa,this);      
         blacky.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBBjActionPerformed
 
     private void jBSlotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSlotsActionPerformed

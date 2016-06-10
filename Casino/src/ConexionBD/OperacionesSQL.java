@@ -282,6 +282,11 @@ public class OperacionesSQL {
         
     }
     
+    /**
+     * Metodo que devuelve una tabla bidimensional de datos de usuario
+     * @param filtro Username
+     * @return String[][] 
+     */
     public String[][] Listado_filtrado_user (String filtro){
         String[][] usuarios = null;
         String sql = "Select count(Username) from Usuarios";
