@@ -38,6 +38,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
     JFrame root;
     Casino fipesa;
     String apu;
+    User usuario;
     
 
     /**
@@ -59,7 +60,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
 
         jLabelValorC.setText(Integer.toString(blacky.getBj().contarCartas(blacky.getBj().getManoC())));
         jLabelValorP.setText(Integer.toString(blacky.getBj().contarCartas(blacky.getBj().getManoP())));
-        jLabelDinero.setText(Double.toString(user.getMonedero().getFondos()));
+        jLabelDinero.setText(Double.toString(usuario.getMonedero().getFondos()));
         jDialogGanador.setLocationRelativeTo(null);
         jDialogPerdedor.setLocationRelativeTo(null);
         jDialogTransaccionIncorrecta.setLocationRelativeTo(null);
@@ -701,8 +702,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jDialogGanador.setVisible(true);
 
             try {
-                usuario.añadirFondos(apuesta * ganador / 100);
-                usuario.añadirFondos(apuesta);
+                fipesa.getUsuario().añadirFondos(apuesta * ganador / 100);
+                fipesa.getUsuario().añadirFondos(apuesta);
                 guardarJugada();
 
             } catch (TransaccionIncorrecta ex) {
@@ -836,7 +837,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BlackJackGrafica(usuario).setVisible(true);
+                new BlackJackGrafica(null,null).setVisible(true);
             }
         });
     }
