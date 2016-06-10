@@ -476,6 +476,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
      * Reparte cartas al crupier y actualiza la GUI
      */
     private void repartirCartasC() {
+        
         this.blacky.getBj().pedirCartaCrupier();
         jPanelCrupier.removeAll();
         jPanelCrupier.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -495,6 +496,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jPanelCrupier.add(carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(pos, 23, 100, 130));
             pos += 90;
         }
+        
 
         jPanelCrupier.updateUI();
 
