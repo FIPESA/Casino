@@ -5,12 +5,18 @@
  */
 package Grafica;
 
+import Exceptions.TransaccionIncorrecta;
+import Usuarios.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alumno
  */
 public class AñadirFondos extends javax.swing.JDialog {
-
+    User usuario;
    
     
     
@@ -79,6 +85,11 @@ public class AñadirFondos extends javax.swing.JDialog {
 
         jbIngresar.setBackground(new java.awt.Color(153, 153, 153));
         jbIngresar.setText("Ingresar");
+        jbIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbIngresarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -147,6 +158,16 @@ public class AñadirFondos extends javax.swing.JDialog {
     private void jtfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCantidadActionPerformed
+
+    private void jbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbIngresarMouseClicked
+        try {
+            usuario.añadirFondos(Double.parseDouble(jtfCantidad.getText()));
+        } catch (TransaccionIncorrecta ex) {
+            Logger.getLogger(AñadirFondos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException exn){
+            JOptionPane()
+        }
+    }//GEN-LAST:event_jbIngresarMouseClicked
 
     /**
      * @param args the command line arguments
