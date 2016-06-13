@@ -29,7 +29,7 @@ public class Jugar_Slots implements Jugable{
     public boolean comprobar(){
         boolean ganador = false;
         
-        if(slots.getResultado1() == slots.getResultado2() && slots.getResultado1() == slots.getResultado3()){
+        if(slots.getFruta1()== slots.getFruta2()&& slots.getFruta1()== slots.getFruta3()){
             ganador = true;
         }
         
@@ -43,24 +43,24 @@ public class Jugar_Slots implements Jugable{
     public double premios(){
         double premio = 0;
         
-        if(slots.getResultado1() == Slots.TRIPLESIETE){
+        if(slots.getFruta1() == Frutas.SIETE){
             premio = 1000;
-        } else if(slots.getResultado1() == Slots.PLATANO){
-            premio = 750;
-        } else if(slots.getResultado1() == Slots.SANDIA){
-            premio = 600;
-        } else if(slots.getResultado1() == Slots.CAMPANA){
-            premio = 400;
-        } else if(slots.getResultado1() == Slots.BAR){
+        } else if(slots.getFruta1() == Frutas.PLATANO){
+            premio = 500;
+        } else if(slots.getFruta1() == Frutas.SANDIA){
             premio = 200;
-        } else if(slots.getResultado1() == Slots.LIMON){
+        } else if(slots.getFruta1() == Frutas.CAMPANA){
             premio = 100;
-        } else if(slots.getResultado1() == Slots.NARANJA){
+        } else if(slots.getFruta1() == Frutas.BAR){
             premio = 50;
-        } else if(slots.getResultado1() == Slots.UVA){
-            premio = 25;
-        } else if(slots.getResultado1() == Slots.CEREZA){
+        } else if(slots.getFruta1() == Frutas.LIMON){
             premio = 10;
+        } else if(slots.getFruta1() == Frutas.NARANJA){
+            premio = 2;
+        } else if(slots.getFruta1() == Frutas.UVA){
+            premio = 1;
+        } else if(slots.getFruta1() == Frutas.CEREZA){
+            premio = 0.5;
         }
         
         return premio;
@@ -84,9 +84,13 @@ public class Jugar_Slots implements Jugable{
                 
             }
             if(!(jugador instanceof F2P)){
-                jugada = new Jugada_Slots(slots.getResultado1(), slots.getResultado2(), slots.getResultado3(), ganancia);
+                jugada = new Jugada_Slots(slots.getFruta1().toInt(), slots.getFruta2().toInt(), slots.getFruta3().toInt(), ganancia);
                 jugada.guardar(this.jugador.getUsername());
             }
+            
+            
+            Double prueba = 25.26;
+            
             
         } catch (TransaccionIncorrecta ex) {
             throw new ImposibleJugar("Error al añadir o retirar fondos");
