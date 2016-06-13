@@ -29,7 +29,7 @@ public class Jugar_Slots implements Jugable{
     public boolean comprobar(){
         boolean ganador = false;
         
-        if(slots.getResultado1() == slots.getResultado2() && slots.getResultado1() == slots.getResultado3()){
+        if(slots.getFruta1()== slots.getFruta2()&& slots.getFruta1()== slots.getFruta3()){
             ganador = true;
         }
         

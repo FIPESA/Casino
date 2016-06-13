@@ -5,6 +5,8 @@
  */
 package Juegos;
 
+import javax.swing.Icon;
+
 /**
  *
  * @author Lara
@@ -36,5 +38,30 @@ public enum Frutas {
         }
         
         return valor;
+    }
+    
+    public Icon toIcon(){
+        Icon icono = null;
+        if(this == CEREZA){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Cerezas.png"));
+        } else if(this == UVA){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Uvas.png"));
+        } else if(this == NARANJA){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Naranja.png"));
+        } else if(this == LIMON){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Limon.png"));
+        } else if(this == BAR){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Bar.png"));
+        } else if(this == CAMPANA){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Campana.png"));
+        } else if(this == SANDIA){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Sandia.png"));
+        } else if(this == PLATANO){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Platanos.png"));
+        } else if(this == SIETE){
+            icono = new javax.swing.ImageIcon(getClass().getResource("/resources/Slots/Siete.png"));
+        }
+        
+        return icono;
     }
 }
