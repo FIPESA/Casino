@@ -5,6 +5,7 @@
  */
 package Casino;
 
+import ConexionBD.OperacionesSQL;
 import java.util.Date;
 
 /**
@@ -17,7 +18,6 @@ public class Jugada_BlackJack extends Jugada{
     private double cantidadGanada;
     private int cartasJugador;
     private int cartasCroupier;
-    private Date fecha;
 
     public Jugada_BlackJack(double cantidadApostada, double cantidadGanada, int cartasJugador, int cartasCroupier) {
         super();
@@ -53,7 +53,7 @@ public class Jugada_BlackJack extends Jugada{
     
     @Override
     public void guardar(String usuario) {
-        
+        OperacionesSQL.instancia().addJugada_Blackjack(this, usuario);
     }
     
     

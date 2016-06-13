@@ -6,13 +6,9 @@
 
 package Juegos.BlackJackGraf;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -23,8 +19,7 @@ import javax.swing.JButton;
 public class Carta extends JButton {
     private char simbolo;//2,3,4,5,6,7,8,9,10,J,Q,K,A
     private char tipo;//P C T R (Picas, Corazones, Treboles, Rombos)
-    private int indice;
-    BufferedImage icon= null;
+    private int indice;   
     ImageIcon imagen;
     private int unico;
     

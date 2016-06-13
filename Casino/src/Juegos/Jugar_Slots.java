@@ -5,9 +5,7 @@ import Casino.Jugada_Slots;
 import Exceptions.*;
 import Usuarios.*;
 import Usuarios.User;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 public class Jugar_Slots implements Jugable{

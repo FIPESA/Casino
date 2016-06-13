@@ -167,10 +167,9 @@ public class P2W extends User{
     
     
     /**
-     * añade fondos al monedero
-     * @param cantidad
-     * @throws NegativeNumberException
-     * @throws ZeroException 
+     * añade fondos al monedero actualizando la bd
+     * @param cantidad 
+     * @throws Exceptions.TransaccionIncorrecta 
      */
     @Override
     public void añadirFondos(double cantidad) throws TransaccionIncorrecta{
@@ -178,17 +177,33 @@ public class P2W extends User{
         OperacionesSQL.instancia().actualizarFondos(this);
     }
 
+    /**
+     * Retira fondos del monedero actulizando la bd
+     * @param cantidad
+     * @throws TransaccionIncorrecta 
+     */
     @Override
     public void retirarFondos(double cantidad) throws TransaccionIncorrecta {
         this.getMonedero().retirarFondos(cantidad);
         OperacionesSQL.instancia().actualizarFondos(this);
     }
     
+    /**
+     * Añade fondos al monedero creando una transaccion en la bd
+     * @param cantidad
+     * @throws TransaccionIncorrecta 
+     */
     public void añadirFondosTransaccion (double cantidad) throws TransaccionIncorrecta{
         this.añadirFondos(cantidad);
         Transaccion trans = new Transaccion (cantidad);
         OperacionesSQL.instancia().AddTransaccion(trans, this);
     }
+    
+    /**
+     * Retira fondos del monedero y crea una transaccion en la bd
+     * @param cantidad
+     * @throws TransaccionIncorrecta 
+     */
     public void retirarFondosTransaccion (double cantidad) throws TransaccionIncorrecta{
         this.retirarFondos(cantidad);
         Transaccion trans = new Transaccion (-cantidad);

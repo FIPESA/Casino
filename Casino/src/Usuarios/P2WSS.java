@@ -4,12 +4,7 @@ package Usuarios;
 
 import java.util.Date;
 import Exceptions.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 
 
 public class P2WSS extends P2W{
@@ -41,7 +36,7 @@ public class P2WSS extends P2W{
     }
     
     /**
-     * 
+     * Fija la fecha de fin de premium
      * @param days
      * @throws PremiumUpdateException 
      */

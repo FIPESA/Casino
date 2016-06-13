@@ -6,17 +6,7 @@
 package Juegos.BlackJackGraf;
 
 import java.util.*;
-import Usuarios.*;
-import java.util.Scanner;
-import Exceptions.*;
 
-/**
- * Funcionamiento de el juego del BlackJack. Incluye metodos para crear las
- * barajas, las pilas y las manos de los participantes.
- *
- * @author E.Maniega
- * @version 05/05/2016 0.
- */
 
 
 
