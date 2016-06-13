@@ -72,6 +72,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jBBj = new javax.swing.JButton();
         jBSlots = new javax.swing.JButton();
         jBatras = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -141,6 +142,15 @@ public class JuegosGrafica extends javax.swing.JFrame {
         });
         jPanel1.add(jBatras);
         jBatras.setBounds(20, 520, 80, 60);
+
+        jButton1.setText("Ver stats");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(683, 550, 90, 30);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255, 200));
 
@@ -342,6 +352,12 @@ public class JuegosGrafica extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        StatsGrafica sg = new StatsGrafica(fipesa, this);
+        sg.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -383,6 +399,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
     private javax.swing.JButton jBSlots;
     private javax.swing.JButton jBatras;
     private javax.swing.JButton jBrul;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
