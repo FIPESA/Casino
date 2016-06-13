@@ -8,25 +8,17 @@ package Juegos;
 import java.util.*;
 
 
-public class Slots{  
-    public final static int CANTIDAD_NUMEROS = 9;
-    public final static int TRIPLESIETE = 1;
-    public final static int PLATANO = 2;
-    public final static int SANDIA = 3;
-    public final static int CAMPANA = 4;
-    public final static int BAR = 5;
-    public final static int LIMON = 6;
-    public final static int NARANJA = 7;
-    public final static int UVA = 8;
-    public final static int CEREZA = 9;
-    
-    public final static Frutas[] ROLLO1 = {};
-    public final static Frutas[] ROLLO2 = {};
-    public final static Frutas[] ROLLO3 = {};
+public class Slots{
+    public final static int CANTIDAD_NUMEROS = 45;
+    public final static Frutas[] ROLLO = {Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.LIMON,Frutas.BAR,Frutas.CAMPANA,Frutas.SANDIA,Frutas.PLATANO,Frutas.SIETE,Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.LIMON,Frutas.BAR,Frutas.CAMPANA,Frutas.SANDIA,Frutas.PLATANO,Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.LIMON,Frutas.BAR,Frutas.CAMPANA,Frutas.SANDIA,Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.LIMON,Frutas.BAR,Frutas.CAMPANA,Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.LIMON,Frutas.BAR,Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.LIMON,Frutas.CEREZA,Frutas.UVA,Frutas.NARANJA,Frutas.CEREZA,Frutas.UVA,Frutas.CEREZA};
     
     private int resultado1;
     private int resultado2;
     private int resultado3;
+    
+    private Frutas fruta1;
+    private Frutas fruta2;
+    private Frutas fruta3;
 
     public Slots() {
     }
@@ -44,71 +36,15 @@ public class Slots{
      * metodo que aleatoriza tres resultados y los asigna a los valores de los slots
      */
     public void girarRollos(){
-        int aleatorio;
+        this.resultado1 = aleatorio();
+        this.resultado2 = aleatorio();
+        this.resultado3 = aleatorio();
         
-        aleatorio = aleatorio();
-        if(aleatorio==0){
-             resultado1 = CEREZA;
-        }else if(aleatorio==1){
-             resultado1 = UVA;
-        }else if(aleatorio==2){
-             resultado1 = NARANJA;
-        }else if(aleatorio==3){
-             resultado1 = LIMON;
-        }else if(aleatorio==4){
-             resultado1 = BAR;
-        }else if(aleatorio==5){
-             resultado1 = CAMPANA;
-        }else if(aleatorio==6){
-             resultado1 = SANDIA;
-        }else if(aleatorio==7){
-             resultado1 = PLATANO;
-        }else if(aleatorio==8){
-             resultado1 = TRIPLESIETE;
-        }
-        
-        aleatorio = aleatorio();
-        if(aleatorio==0){
-             resultado2 = CEREZA;
-        }else if(aleatorio==1){
-             resultado2 = UVA;
-        }else if(aleatorio==2){
-             resultado2 = NARANJA;
-        }else if(aleatorio==3){
-             resultado2 = LIMON;
-        }else if(aleatorio==4){
-             resultado2 = BAR;
-        }else if(aleatorio==5){
-             resultado2 = CAMPANA;
-        }else if(aleatorio==6){
-             resultado2 = SANDIA;
-        }else if(aleatorio==7){
-             resultado2 = PLATANO;
-        }else if(aleatorio==8){
-             resultado2 = TRIPLESIETE;
-        }
-        
-        aleatorio = aleatorio();
-        if(aleatorio==0){
-             resultado3 = CEREZA;
-        }else if(aleatorio==1){
-             resultado3 = UVA;
-        }else if(aleatorio==2){
-             resultado3 = NARANJA;
-        }else if(aleatorio==3){
-             resultado3 = LIMON;
-        }else if(aleatorio==4){
-             resultado3 = BAR;
-        }else if(aleatorio==5){
-             resultado3 = CAMPANA;
-        }else if(aleatorio==6){
-             resultado3 = SANDIA;
-        }else if(aleatorio==7){
-             resultado3 = PLATANO;
-        }else if(aleatorio==8 ){
-             resultado3 = TRIPLESIETE;
-        }
+        this.fruta1 = ROLLO[resultado1];
+        this.fruta2 = ROLLO[resultado2];
+        this.fruta3 = ROLLO[resultado3];        
     }
+
 
     public int getResultado1() {
         return resultado1;
@@ -121,4 +57,18 @@ public class Slots{
     public int getResultado3() {
         return resultado3;
     }
+
+    public Frutas getFruta1() {
+        return fruta1;
+    }
+
+    public Frutas getFruta2() {
+        return fruta2;
+    }
+
+    public Frutas getFruta3() {
+        return fruta3;
+    }
+    
+    
 }
