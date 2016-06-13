@@ -183,8 +183,8 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
 
         if(rg.isValido()){
             fipesa.setUsuario( (P2W) rg.getUsuario());
-            P2WGrafica p2w = new P2WGrafica(fipesa,this);
-            p2w.setVisible(true);
+            JuegosGrafica jg = new JuegosGrafica(fipesa, this);
+            jg.setVisible(true);
             this.setVisible(false);
         }
 
@@ -201,13 +201,13 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
         if(logueo.isValido()){
             if(logueo.getUsuario() instanceof P2WSS){
                 fipesa.setUsuario( (P2WSS) logueo.getUsuario());
-                P2WSSGrafica p2wss = new P2WSSGrafica(fipesa,this);
-                p2wss.setVisible(true);
+                JuegosGrafica jg = new JuegosGrafica(fipesa, this);
+                jg.setVisible(true);
                 this.setVisible(false);
             }else if (logueo.getUsuario() instanceof P2W){
                 fipesa.setUsuario( (P2W) logueo.getUsuario());
-                P2WGrafica p2w = new P2WGrafica(fipesa,this);
-                p2w.setVisible(true);
+                JuegosGrafica jg = new JuegosGrafica(fipesa, this);
+                jg.setVisible(true);
                 this.setVisible(false);
             }else if (logueo.getUsuario() instanceof Admin){
                 fipesa.setUsuario((Admin) logueo.getUsuario());

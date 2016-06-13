@@ -285,7 +285,8 @@ public class VerMonedero extends javax.swing.JFrame {
     }//GEN-LAST:event_jbRetirarActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        // TODO add your handling code here:
+        root.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     /**

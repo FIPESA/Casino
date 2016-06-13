@@ -6,12 +6,15 @@
 package Grafica;
 
 import Casino.Casino;
+import Exceptions.PremiumUpdateException;
+import Exceptions.TransaccionIncorrecta;
 import Juegos.BlackJackGraf.JugarBlackJack;
 import Usuarios.F2P;
 import Usuarios.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +44,9 @@ public class JuegosGrafica extends javax.swing.JFrame {
             jLabel5.setIcon(p2w);
         }else if(fipesa.getUsuario() instanceof F2P){
             jLabel5.setIcon(f2p);
+            jButton2.setEnabled(false);
+            jButton3.setEnabled(false);
+            jButton4.setEnabled(false);
         }
         
     }
@@ -74,6 +80,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -125,7 +132,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jBSlots.setBounds(90, 280, 140, 170);
 
         jBatras.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
-        jBatras.setText("Atrás");
+        jBatras.setText("Salir");
         jBatras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jBatras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,6 +175,14 @@ public class JuegosGrafica extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setText("Premium");
+        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -183,12 +198,14 @@ public class JuegosGrafica extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGap(41, 41, 41)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                             .addComponent(jTextField2)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -207,8 +224,9 @@ public class JuegosGrafica extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jButton3)
+                            .addComponent(jButton4))
+                        .addGap(0, 17, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -247,8 +265,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
 
     private void jBatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBatrasActionPerformed
        
-        this.setVisible(false);
-        root.setVisible(true);       
+        System.exit(0);
         
     }//GEN-LAST:event_jBatrasActionPerformed
 
@@ -285,6 +302,45 @@ public class JuegosGrafica extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       
+        if(fipesa.getUsuario()instanceof P2W){
+            UserUpgrade uu = new UserUpgrade(this,true);
+            uu.setVisible(true);
+
+            if(uu.isValido()){
+                try {
+                    P2W p2w = (P2W)fipesa.getUsuario();
+                    fipesa.setUsuario(p2w.UpgradeSubscription(uu.getDias()));
+                    JuegosGrafica jg = new JuegosGrafica(fipesa, this);
+                jg.setVisible(true);
+                    this.setVisible(false);
+                } catch (PremiumUpdateException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Fallo en la actualizacion","AVISO" , JOptionPane.ERROR_MESSAGE);
+                } catch (TransaccionIncorrecta ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Usted no dispone de fondos suficientes","ERROR" , JOptionPane.ERROR_MESSAGE);
+                }
+            }   
+        }else if(fipesa.getUsuario() instanceof P2WSS){
+            UserUpgrade uu = new UserUpgrade(this,true);
+            uu.setVisible(true);
+
+            if(uu.isValido()){
+                try {
+                    P2WSS p2wss = (P2WSS)fipesa.getUsuario();
+                    fipesa.setUsuario(p2wss.UpgradeSubscription(uu.getDias()));
+                    JuegosGrafica jg = new JuegosGrafica(fipesa, this);
+                    jg.setVisible(true);
+                    this.setVisible(false);
+                } catch (PremiumUpdateException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Fallo en la actualizacion","AVISO" , JOptionPane.ERROR_MESSAGE);
+                } catch (TransaccionIncorrecta ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Usted no dispone de fondos suficientes","ERROR" , JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,6 +385,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
     private javax.swing.JButton jBrul;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
