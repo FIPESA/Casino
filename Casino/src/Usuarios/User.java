@@ -9,8 +9,7 @@ import Exceptions.*;
 import java.io.*;
 import java.util.Date;
 import ConexionBD.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public abstract class User implements Comparable<User>,Serializable{
     
@@ -28,8 +27,7 @@ public abstract class User implements Comparable<User>,Serializable{
         this.Monedero = monedero;
     }
         
-    public abstract boolean VerStats();
-
+    
     public Monedero getMonedero() {
         return Monedero;
     }
@@ -189,8 +187,7 @@ public abstract class User implements Comparable<User>,Serializable{
         return user;
     }
     
-    public abstract void guardar();
-    
+    public abstract void guardar();    
     
     public abstract void añadirFondos(double cantidad) throws TransaccionIncorrecta;
     

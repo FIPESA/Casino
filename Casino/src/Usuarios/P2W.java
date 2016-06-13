@@ -3,7 +3,6 @@ package Usuarios;
 import ConexionBD.OperacionesSQL;
 import java.util.*;
 import Exceptions.*;
-import java.io.*;
 
 public class P2W extends User{
 
@@ -71,31 +70,8 @@ public class P2W extends User{
         this.aceptado=aceptado;
     }
     
-    
     /**
-     * Necesita base de datos
-     * @return 
-     */
-    @Override
-    public boolean VerStats() {
-        return true;
-    }
-    
-    /**
-     * 
-     * @param Email
-     * @throws EmailAddException 
-     */
-    public void AddEmail(String Email) throws EmailAddException{
-        if (this.Email==null){
-            this.Email=Email;
-        } else{
-            throw new EmailAddException("Error al añadir el email");
-        }
-    }
-    
-    /**
-     * 
+     * Devuelve un user mejorado con los dias que se pasan como parametro
      * @param days
      * @return
      * @throws PremiumUpdateException 
@@ -182,7 +158,7 @@ public class P2W extends User{
     
     
     /**
-     * actualiza el archivo de guardado del usuario o lo crea si este no existe
+     * Actualiza el usuario en la bd
      */
     @Override
     public void guardar() {

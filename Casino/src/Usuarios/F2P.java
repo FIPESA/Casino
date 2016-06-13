@@ -3,7 +3,6 @@ package Usuarios;
 
 
 import Exceptions.TransaccionIncorrecta;
-import java.util.Date;
 
 public class F2P extends User {
 
@@ -11,16 +10,7 @@ public class F2P extends User {
         super(Username);
         
     }
-    
-    /**
-     * Necesita base de datos
-     * @return 
-     */
-    @Override
-    public boolean VerStats() {
-        return true;
-    }
-    
+
     /**
      * Sin uso
      */

@@ -19,15 +19,7 @@ public class Admin extends User{
         
     }
     
-    /**
-     * Necesita base de datos
-     * @return 
-     */
-    @Override
-    public boolean VerStats() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+        
     /**
      * Establece el estado del usuario a inactivo 
      * @param usuario
