@@ -17,14 +17,14 @@ import javax.swing.JOptionPane;
  * @author alumno
  */
 public class AñadirFondos extends javax.swing.JDialog {
-    User usuario;
+    P2W usuario;
     
     
     
     public AñadirFondos(java.awt.Frame parent, boolean modal, User usuario) {
         super(parent, modal);
         initComponents();
-        this.usuario = usuario;
+        this.usuario = (P2W)usuario;
         
     }
 
@@ -93,6 +93,11 @@ public class AñadirFondos extends javax.swing.JDialog {
                 jbIngresarMouseClicked(evt);
             }
         });
+        jbIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbIngresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,8 +160,7 @@ public class AñadirFondos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        this.setVisible(false);
-        
+        this.setVisible(false);        
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jtfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCantidadActionPerformed
@@ -164,16 +168,22 @@ public class AñadirFondos extends javax.swing.JDialog {
     }//GEN-LAST:event_jtfCantidadActionPerformed
 
     private void jbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbIngresarMouseClicked
+        
+    }//GEN-LAST:event_jbIngresarMouseClicked
+
+    private void jbIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarActionPerformed
         try {
             usuario.añadirFondos(Double.parseDouble(jtfCantidad.getText()));
+            usuario.añadirFondosTransaccion(Double.parseDouble(jtfCantidad.getText()));
+            this.setVisible(false);
         } catch (TransaccionIncorrecta ex) {
-            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", WIDTH);
+            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", JOptionPane.ERROR_MESSAGE);
             jtfCantidad.setText("");
         } catch (NumberFormatException exn){
-            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", WIDTH);
+            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", JOptionPane.ERROR_MESSAGE);
             jtfCantidad.setText("");
         }
-    }//GEN-LAST:event_jbIngresarMouseClicked
+    }//GEN-LAST:event_jbIngresarActionPerformed
 
     /**
      * @param args the command line arguments

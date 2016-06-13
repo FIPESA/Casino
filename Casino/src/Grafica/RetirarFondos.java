@@ -6,6 +6,7 @@
 package Grafica;
 
 import Exceptions.TransaccionIncorrecta;
+import Usuarios.P2W;
 import Usuarios.User;
 import static java.awt.image.ImageObserver.WIDTH;
 import javax.swing.JOptionPane;
@@ -16,12 +17,12 @@ import javax.swing.JOptionPane;
  */
 public class RetirarFondos extends javax.swing.JDialog {
 
-   User usuario;
+   P2W usuario;
     
     
     public RetirarFondos(java.awt.Frame parent, boolean modal, User usuario) {
         super(parent, modal);
-        this.usuario = usuario;
+        this.usuario = (P2W)usuario;
         initComponents();
     }
 
@@ -137,11 +138,13 @@ public class RetirarFondos extends javax.swing.JDialog {
     private void jbRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetirarActionPerformed
     try {
             usuario.retirarFondos(Double.parseDouble(jtfCantidad.getText()));
+            usuario.retirarFondosTransaccion(Double.parseDouble(jtfCantidad.getText()));
+            this.setVisible(false);
         } catch (TransaccionIncorrecta ex) {
-            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", WIDTH);
+            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", JOptionPane.ERROR_MESSAGE);
             jtfCantidad.setText("");
         } catch (NumberFormatException exn){
-            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", WIDTH);
+            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", JOptionPane.ERROR_MESSAGE);
             jtfCantidad.setText("");
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jbRetirarActionPerformed

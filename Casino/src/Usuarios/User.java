@@ -16,8 +16,7 @@ public abstract class User implements Comparable<User>,Serializable{
     
     private Monedero Monedero;
     private String Username;
-    private String codigo;
-    
+       
 
     public User(String Username) {
         this.Username = Username;
@@ -47,13 +46,6 @@ public abstract class User implements Comparable<User>,Serializable{
         this.Username = Username;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
     @Override
     public int compareTo(User o) {
        return this.Username.compareToIgnoreCase(o.Username);

@@ -36,6 +36,12 @@ public class VerMonedero extends javax.swing.JFrame {
         tabla = new DefaultTableModel(OperacionesSQL.instancia().listadoTransacciones(fipesa.getUsuario().getUsername()),cabecera);
         jTable1.setModel(tabla);
     }
+        
+    @Override
+    public void setVisible(boolean a){
+        super.setVisible(a);
+        mostrar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +97,7 @@ public class VerMonedero extends javax.swing.JFrame {
 
         jbCerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jbCerrarSesion.setForeground(new java.awt.Color(255, 0, 0));
-        jbCerrarSesion.setText("Cerrar Sesion");
+        jbCerrarSesion.setText("Salir");
         jbCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCerrarSesionActionPerformed(evt);
@@ -131,7 +137,7 @@ public class VerMonedero extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel6.setText("Retiramos una cantidad de dinero del monedero");
+        jLabel6.setText("Retira una cantidad de dinero del monedero");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -219,10 +225,6 @@ public class VerMonedero extends javax.swing.JFrame {
         jLabel1.setText("MONEDERO");
         jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 4, true));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Desktop\\yeah.jpg")); // NOI18N
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Desktop\\yeah.jpg")); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,19 +269,19 @@ public class VerMonedero extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarSesionActionPerformed
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jbCerrarSesionActionPerformed
 
     private void jbAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAñadirActionPerformed
      
-        AñadirFondos an = new AñadirFondos(root, true,fipesa.getUsuario());
+        AñadirFondos an = new AñadirFondos(this, true,fipesa.getUsuario());
         an.setVisible(true);
                 
     }//GEN-LAST:event_jbAñadirActionPerformed
 
     private void jbRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetirarActionPerformed
        
-        RetirarFondos rt = new RetirarFondos(root, true,fipesa.getUsuario());
+        RetirarFondos rt = new RetirarFondos(this, true,fipesa.getUsuario());
         rt.setVisible(true);
         
     }//GEN-LAST:event_jbRetirarActionPerformed
