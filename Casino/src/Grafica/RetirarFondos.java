@@ -5,17 +5,23 @@
  */
 package Grafica;
 
+import Exceptions.TransaccionIncorrecta;
+import Usuarios.User;
+import static java.awt.image.ImageObserver.WIDTH;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alumno
  */
 public class RetirarFondos extends javax.swing.JDialog {
 
-   
+   User usuario;
     
     
-    public RetirarFondos(java.awt.Frame parent, boolean modal) {
+    public RetirarFondos(java.awt.Frame parent, boolean modal, User usuario) {
         super(parent, modal);
+        this.usuario = usuario;
         initComponents();
     }
 
@@ -129,7 +135,15 @@ public class RetirarFondos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetirarActionPerformed
-        // TODO add your handling code here:
+    try {
+            usuario.retirarFondos(Double.parseDouble(jtfCantidad.getText()));
+        } catch (TransaccionIncorrecta ex) {
+            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", WIDTH);
+            jtfCantidad.setText("");
+        } catch (NumberFormatException exn){
+            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", WIDTH);
+            jtfCantidad.setText("");
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jbRetirarActionPerformed
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
@@ -166,7 +180,7 @@ public class RetirarFondos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RetirarFondos dialog = new RetirarFondos(new javax.swing.JFrame(), true);
+                RetirarFondos dialog = new RetirarFondos(null, true,null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

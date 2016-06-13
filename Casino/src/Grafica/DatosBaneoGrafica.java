@@ -48,6 +48,8 @@ public class DatosBaneoGrafica extends javax.swing.JDialog {
         jBCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jLabel1.setText("Introduce la fecha de fin de baneo");
 

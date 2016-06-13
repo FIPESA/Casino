@@ -5,6 +5,7 @@
  */
 package Grafica;
 
+import Casino.Casino;
 import Casino.Jugada_BlackJack;
 import Exceptions.TransaccionIncorrecta;
 import Juegos.BlackJackGraf.BlackJack;
@@ -17,6 +18,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -26,7 +29,6 @@ import javax.swing.JTextField;
 public class BlackJackGrafica extends javax.swing.JFrame {
 
     JugarBlackJack blacky;
-    User usuario;
     int ganador = 100;
     boolean bandera = true;
     double apuesta;
@@ -34,17 +36,22 @@ public class BlackJackGrafica extends javax.swing.JFrame {
     int manoP;
     int manoC;
     private Jugada_BlackJack jugada;
+    JFrame root;
+    Casino fipesa;
     String apu;
+    User usuario;
+    
 
     /**
      * Creates new form BlackJackGrafica
      */
-    public BlackJackGrafica(User user) {
+    public BlackJackGrafica(Casino fipesa, JFrame root) {
         initComponents();
-        blacky = new JugarBlackJack(user);
+        blacky = new JugarBlackJack(fipesa.getUsuario());
         setLocationRelativeTo(null);
         setResizable(false);
-        usuario = user;
+        usuario = fipesa.getUsuario();
+        this.root = root;
 
         //botonazo = new JButton ("mierda");
         //jPanelCrupier.add(botonazo);
@@ -55,7 +62,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
 
         jLabelValorC.setText(Integer.toString(blacky.getBj().contarCartas(blacky.getBj().getManoC())));
         jLabelValorP.setText(Integer.toString(blacky.getBj().contarCartas(blacky.getBj().getManoP())));
-        jLabelDinero.setText(Double.toString(user.getMonedero().getFondos()));
+        jLabelDinero.setText(Double.toString(usuario.getMonedero().getFondos()));
         jDialogGanador.setLocationRelativeTo(null);
         jDialogPerdedor.setLocationRelativeTo(null);
         jDialogTransaccionIncorrecta.setLocationRelativeTo(null);
@@ -97,10 +104,10 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabelDinero = new javax.swing.JLabel();
         jButtonApostar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jDialogTransaccionIncorrecta.setTitle("Operacion no realizada");
         jDialogTransaccionIncorrecta.setAlwaysOnTop(true);
-        jDialogTransaccionIncorrecta.setMaximumSize(new java.awt.Dimension(234, 98));
         jDialogTransaccionIncorrecta.setMinimumSize(new java.awt.Dimension(234, 98));
         jDialogTransaccionIncorrecta.setModal(true);
         jDialogTransaccionIncorrecta.setResizable(false);
@@ -125,7 +132,6 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         );
 
         jDialogGanador.setAlwaysOnTop(true);
-        jDialogGanador.setMaximumSize(new java.awt.Dimension(305, 172));
         jDialogGanador.setMinimumSize(new java.awt.Dimension(305, 172));
         jDialogGanador.setModal(true);
         jDialogGanador.setResizable(false);
@@ -194,7 +200,6 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jDialogPerdedor.setMaximumSize(new java.awt.Dimension(400, 300));
         jDialogPerdedor.setMinimumSize(new java.awt.Dimension(400, 300));
         jDialogPerdedor.setModal(true);
 
@@ -324,6 +329,18 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Volver");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -357,7 +374,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jButtonApostar)
-                                        .addComponent(jLabelDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabelDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton2))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jTextFieldApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,8 +433,13 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                                 .addComponent(jButtonApostar)
                                 .addGap(36, 36, 36)
                                 .addComponent(jLabelDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(51, 51, 51)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2)))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -453,6 +476,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
      * Reparte cartas al crupier y actualiza la GUI
      */
     private void repartirCartasC() {
+        
         this.blacky.getBj().pedirCartaCrupier();
         jPanelCrupier.removeAll();
         jPanelCrupier.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -472,6 +496,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jPanelCrupier.add(carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(pos, 23, 100, 130));
             pos += 90;
         }
+        
 
         jPanelCrupier.updateUI();
 
@@ -497,15 +522,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                 apu = "";
                 jDialogGanador.setVisible(true);
                 hecho = false;
-                try {
-                    usuario.añadirFondos(apuesta);
-                    usuario.añadirFondos(apuesta * ganador / 100);
-                    actualizarValorD();
-                    apuesta = 0;
-                } catch (TransaccionIncorrecta ex) {
-                    jDialogTransaccionIncorrecta.setVisible(true);
-                }
-
+                
                 //SI TIENE 17 O MENOS PIDE CARTA
             } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) < 17) {
                 repartirCartasC();
@@ -686,8 +703,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jDialogGanador.setVisible(true);
 
             try {
-                usuario.añadirFondos(apuesta * ganador / 100);
-                usuario.añadirFondos(apuesta);
+                fipesa.getUsuario().añadirFondos(apuesta * ganador / 100);
+                fipesa.getUsuario().añadirFondos(apuesta);
                 guardarJugada();
 
             } catch (TransaccionIncorrecta ex) {
@@ -773,6 +790,15 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSalirGanadorActionPerformed
 
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
+        root.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public JTextField getjTextFieldApuesta() {
         return jTextFieldApuesta;
     }
@@ -816,13 +842,14 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BlackJackGrafica(usuario).setVisible(true);
+                new BlackJackGrafica(null,null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonApostar;
     private javax.swing.JButton jButtonContinuarJugandoG;
     private javax.swing.JButton jButtonContinuarJugandoP;

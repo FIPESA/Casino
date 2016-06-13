@@ -43,6 +43,8 @@ public class UserUpgrade extends javax.swing.JDialog {
         jBCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jRB1.setText("1 mes / 4.99€");
         jRB1.addActionListener(new java.awt.event.ActionListener() {

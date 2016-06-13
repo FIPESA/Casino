@@ -8,6 +8,7 @@ package Grafica;
 import Exceptions.BanException;
 import Exceptions.UserReadingException;
 import Usuarios.*;
+import java.awt.Color;
 import javafx.scene.input.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,7 @@ public class Login extends javax.swing.JDialog {
 
     private User usuario;
     private boolean valido;
+    
     
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -68,6 +70,8 @@ public class Login extends javax.swing.JDialog {
         jBSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 255));

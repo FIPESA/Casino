@@ -205,7 +205,18 @@ public class P2W extends User{
     @Override
     public void retirarFondos(double cantidad) throws TransaccionIncorrecta {
         this.getMonedero().retirarFondos(cantidad);
-        OperacionesSQL.instancia().actualizarUsuario(this);
+        OperacionesSQL.instancia().actualizarFondos(this);
+    }
+    
+    public void añadirFondosTransaccion (double cantidad) throws TransaccionIncorrecta{
+        this.añadirFondos(cantidad);
+        Transaccion trans = new Transaccion (cantidad);
+        OperacionesSQL.instancia().AddTransaccion(trans, this);
+    }
+    public void retirarFondosTransaccion (double cantidad) throws TransaccionIncorrecta{
+        this.retirarFondos(cantidad);
+        Transaccion trans = new Transaccion (-cantidad);
+        OperacionesSQL.instancia().AddTransaccion(trans, this);
     }
     
     

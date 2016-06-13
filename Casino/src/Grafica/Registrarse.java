@@ -59,6 +59,8 @@ public class Registrarse extends javax.swing.JDialog {
         jBatras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 36)); // NOI18N
         jLabel1.setText("REGISTRARSE");
@@ -131,7 +133,7 @@ public class Registrarse extends javax.swing.JDialog {
                         .addGroup(layout.createSequentialGroup()
                             .addGap(152, 152, 152)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

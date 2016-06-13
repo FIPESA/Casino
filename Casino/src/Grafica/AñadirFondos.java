@@ -5,18 +5,27 @@
  */
 package Grafica;
 
+import Exceptions.TransaccionIncorrecta;
+import Usuarios.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alumno
  */
 public class AñadirFondos extends javax.swing.JDialog {
-
-   
+    User usuario;
     
     
-    public AñadirFondos(java.awt.Frame parent, boolean modal) {
+    
+    public AñadirFondos(java.awt.Frame parent, boolean modal, User usuario) {
         super(parent, modal);
         initComponents();
+        this.usuario = usuario;
+        
     }
 
     /**
@@ -79,6 +88,11 @@ public class AñadirFondos extends javax.swing.JDialog {
 
         jbIngresar.setBackground(new java.awt.Color(153, 153, 153));
         jbIngresar.setText("Ingresar");
+        jbIngresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbIngresarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,12 +155,25 @@ public class AñadirFondos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtrasActionPerformed
-        hide();
+        this.setVisible(false);
+        
     }//GEN-LAST:event_jbAtrasActionPerformed
 
     private void jtfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfCantidadActionPerformed
+
+    private void jbIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbIngresarMouseClicked
+        try {
+            usuario.añadirFondos(Double.parseDouble(jtfCantidad.getText()));
+        } catch (TransaccionIncorrecta ex) {
+            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", WIDTH);
+            jtfCantidad.setText("");
+        } catch (NumberFormatException exn){
+            JOptionPane.showMessageDialog(rootPane, "Introduce un numero valido.", "CUIDADO!!", WIDTH);
+            jtfCantidad.setText("");
+        }
+    }//GEN-LAST:event_jbIngresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -178,7 +205,7 @@ public class AñadirFondos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                AñadirFondos dialog = new AñadirFondos(new javax.swing.JFrame(), true);
+                AñadirFondos dialog = new AñadirFondos(null, false, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
