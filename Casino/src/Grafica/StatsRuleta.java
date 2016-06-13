@@ -26,6 +26,7 @@ public class StatsRuleta extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.fipesa = fipesa;
+        setLocationRelativeTo(null);
         jTextField1.setText(Double.toString(getApuesta())+"€");
         jTextField2.setText(Double.toString(getPorcetaje())+"%");
     }

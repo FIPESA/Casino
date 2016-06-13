@@ -36,6 +36,8 @@ public class JuegosGrafica extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.fipesa = fipesa;
         this.root = root;
+        jTextField1.setEditable(false);
+        jTextField2.setEditable(false);
         jTextField1.setText(fipesa.getUsuario().getUsername());
         jTextField2.setText(Double.toString(fipesa.getUsuario().getMonedero().getFondos()));
         if(fipesa.getUsuario() instanceof P2WSS){
