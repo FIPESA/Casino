@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Juegos;
+package Juegos.Ruleta;
 import Casino.*;
 import Exceptions.*;
+import Juegos.Jugable;
 import Usuarios.*;
 
 

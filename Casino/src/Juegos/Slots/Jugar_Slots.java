@@ -1,8 +1,9 @@
 
-package Juegos;
+package Juegos.Slots;
 
 import Casino.Jugada_Slots;
 import Exceptions.*;
+import Juegos.Jugable;
 import Usuarios.*;
 import Usuarios.User;
 
