@@ -676,17 +676,35 @@ public class OperacionesSQL {
     }
     
     public boolean comprobarRenta(User uss){
-        try {
-            boolean valido;
-            String sql = "Select (count(Select Jugadas_Slots.Id_Jugada from Jugadas_Slots where Username='"+uss.getUsername()+"')*0.5)";
-            //SELECT ((count(Jugadas_Slots.Id_Jugada)*0.5)+sum(Jugadas_Blackjack.CantidadApostada)+sum( Jugadas_Ruleta.CantidadGanada)) from Jugadas_Blackjack,Jugadas_Ruleta,Jugadas_Slots;
-            ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(sql);
-            System.out.println(rs.getString(1));
-            
+        boolean valido = false;
+        try {            
+            double suma = 0;
+            String sql1 = "Select count(Id_Jugada) from Jugadas_Slots where Username='"+uss.getUsername()+"';";
+            String sql2 = "Select sum(CantidadApostada) from Jugadas_Ruleta where Username='"+uss.getUsername()+"';";
+            String sql3 = "Select sum(CantidadApostada) from Jugadas_Blackjack where Username='"+uss.getUsername()+"';";
+            ResultSet rs,rsi,rse;
+            rs = ConexionBD.instancia().getStatement().executeQuery(sql1);
+            rs.next();
+            suma += rs.getDouble(1);
+            rs.close();
+            rsi = ConexionBD.instancia().getStatement().executeQuery(sql2);
+            rsi.next();
+            suma += rsi.getDouble(1);
+            rsi.close();
+            rse = ConexionBD.instancia().getStatement().executeQuery(sql3);
+            rse.next();
+            suma += rse.getDouble(1);
+            rse.close();
+            if(uss instanceof P2W){
+                P2W a = (P2W)uss;
+                if(suma < (a.getRenta_num()/2)){
+                    valido = true;
+                }
+            }            
         } catch (SQLException ex) {
-            Logger.getLogger(OperacionesSQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("patata");
         }
-        return true;
+        return valido;
     }
     
     
