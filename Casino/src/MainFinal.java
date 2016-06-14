@@ -308,13 +308,8 @@ public class MainFinal {
                     }
                     break;
                 case 2:
-                    try{
                     System.out.println("Cuanto dinero quiere retirar");
                     cantidad = sc.nextDouble();
-                    fipesa.getUsuario().retirarFondos(cantidad);
-                    } catch(TransaccionIncorrecta e){
-                        System.out.println("Transaccion incorrecta");
-                    }
                     break;
                 case 3:
                     System.out.println("Dispone de: "+fipesa.getUsuario().getMonedero().getFondos());

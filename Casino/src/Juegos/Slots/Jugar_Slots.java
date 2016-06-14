@@ -71,7 +71,7 @@ public class Jugar_Slots implements Jugable{
      * @throws ImposibleJugar si no hay fondos disponibles
      */
     @Override
-    public Jugada_Slots jugar() throws ImposibleJugar {
+    public Jugada_Slots jugar() throws ImposibleJugar, RentaException {
         double ganancia = 0;
         Jugada_Slots jugada = null;
         try {

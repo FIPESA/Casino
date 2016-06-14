@@ -10,6 +10,7 @@ import Usuarios.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Casino.*;
+import Exceptions.RentaException;
 import Juegos.Slots.Frutas;
 import Juegos.Slots.Jugar_Slots;
 import Juegos.Slots.Slots;
@@ -283,6 +284,8 @@ public class SlotsGrafica extends javax.swing.JFrame implements ActionListener{
             timer.start();
         } catch (ImposibleJugar ex) {
             JOptionPane.showMessageDialog(rootPane, "¡¡¡NO HAY FONDOS!!!", "¡AVISO!", JOptionPane.ERROR_MESSAGE);
+        } catch (RentaException ex) {
+            JOptionPane.showMessageDialog(rootPane, "¡¡¡ TE HAS PASADO SEGUN TU RENTA!!!", "¡AVISO!", JOptionPane.ERROR_MESSAGE);
         } finally {            
         }
     }//GEN-LAST:event_jButton1ActionPerformed

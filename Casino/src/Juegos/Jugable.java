@@ -12,5 +12,5 @@ import Exceptions.*;
  * @author alumno
  */
 public interface Jugable {
-    public Jugada jugar() throws ImposibleJugar;
+    public Jugada jugar() throws ImposibleJugar, RentaException;
 }

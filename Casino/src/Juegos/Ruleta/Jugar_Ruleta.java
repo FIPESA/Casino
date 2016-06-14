@@ -89,9 +89,10 @@ public class Jugar_Ruleta implements Jugable{
      * metodo principal del juego de la ruleta
      * @return la ganancia
      * @throws Exceptions.ImposibleJugar en caso de que no existan fondos
+     * @throws Exceptions.RentaException
      */
     @Override
-    public Jugada_Ruleta jugar() throws ImposibleJugar{
+    public Jugada_Ruleta jugar() throws ImposibleJugar, RentaException{
         Jugada_Ruleta jugada = null;
         double ganancia = 0;
         try {

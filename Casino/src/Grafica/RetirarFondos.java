@@ -137,7 +137,6 @@ public class RetirarFondos extends javax.swing.JDialog {
 
     private void jbRetirarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRetirarActionPerformed
     try {
-            usuario.retirarFondos(Double.parseDouble(jtfCantidad.getText()));
             usuario.retirarFondosTransaccion(Double.parseDouble(jtfCantidad.getText()));
             this.setVisible(false);
         } catch (TransaccionIncorrecta ex) {
