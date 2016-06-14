@@ -5,46 +5,49 @@
  */
 package Juegos.BlackJackGraf;
 
+import Casino.Jugada;
+import Casino.Jugada_BlackJack;
 import Exceptions.*;
 import Usuarios.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Grafica.BlackJackGrafica;
+import Juegos.Jugable;
 
 /**
  *
  * @author alumno
  */
-public class JugarBlackJack {
+public class Jugar_BlackJack implements Jugable {
     BlackJackGrafica grafica;
     private BlackJack bj;
     User user;
-    double apu;
+    private double apu;
+    double ganancias;
+    
 
-    public JugarBlackJack(User user) {
+    public Jugar_BlackJack(User user) {
         
         try {
             bj = new BlackJack();
             this.user = user;
             this.hacerJuego();
         } catch (ErrorException ex) {
-            Logger.getLogger(JugarBlackJack.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         
     }
-    
-    public int logicaCrupier (){
-        int ganador = 100;
+    public boolean pedirCartasC (){
         boolean banderaC = true;
-        while (banderaC) {
+        
             //SE COMPRUEBA QUE LA MANO DEL CRUPIER NO SE PASA DE 21
             if (getBj().comprobar21(getBj().getManoC()) == 0) {
-                ganador = 100;
+                
                 banderaC = false;
                 //SI TIENE 17 O MENOS PIDE CARTA
             } else if (getBj().contarCartas(getBj().getManoC()) <= 17) {
-                getBj().pedirCartaCrupier();
+                
                 System.out.println("La mano a pedido una carta y ahora tiene:");
                 System.out.println(getBj().mostrarCartasP(getBj().getManoC()));
                 System.out.println("Y suman: " + getBj().contarCartas(getBj().getManoC()));
@@ -52,7 +55,18 @@ public class JugarBlackJack {
             } else {
                 banderaC = false;
             }
-        }
+            return banderaC;
+        
+    }
+    /**
+     * Engloba la logica de como decide el crupier si pide carta o no y devuelve un int que representa
+     * quien gana, si la banca o el jugador.
+     * @return 100 si gana el jugador, 0 si gana la banca.
+     */
+    public int logicaCrupier (){
+        int ganador = 100;
+        
+        
         //SE VUELVE A COMPROBAR SI LA MANO SE HA PASADO DE 21
         if (getBj().comprobar21(getBj().getManoC()) == 0) {
             ganador = 100;
@@ -65,6 +79,9 @@ public class JugarBlackJack {
         } else if (getBj().contarCartas(getBj().getManoC()) <= 21 && getBj().contarCartas(getBj().getManoP()) < getBj().contarCartas(getBj().getManoC())) {
             ganador = 0;
         }
+        return ganador;
+    }
+    public void ganador(int ganador)throws TransaccionIncorrecta{
         //SI EL GANADOR ES EL USUARIO
         if (ganador != 0) {
             //SI SE PRODUCE UN EMPATE
@@ -75,21 +92,31 @@ public class JugarBlackJack {
             System.out.println("Has GANADO!!!. \nCon esta mano: \n" + getBj().mostrarCartasP(getBj().getManoP()) + " y sumaban\n " + getBj().contarCartas(getBj().getManoP()) + "\nLa del crupier era esta: \n" + getBj().mostrarCartasP(getBj().getManoC())
                     + " \ny sumaban:\n" + getBj().contarCartas(getBj().getManoC()) + "\nHas ganado : " + apu * ganador / 100);
             System.out.println("**********************************************************");
-            try {
+            
                 user.añadirFondos(apu);
-                if (ganador != 0) {
+                ganancias = apu * ganador / 100;
+                if (ganador != 0 && apu < 0) {
+                    
                     user.añadirFondos(apu * ganador / 100);
+                    
                 }
-            } catch (TransaccionIncorrecta ex) {
-                Logger.getLogger(JugarBlackJack.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
+            //SI GANA LA BANCA
             //SI GANA LA BANCA
         } else {
             System.out.println("Gana la banca. Con esta mano: \n" + getBj().mostrarCartasP(getBj().getManoC()) + " que suma: \n " + getBj().contarCartas(getBj().getManoC()) + "\nLa tuya era esta: \n" + getBj().mostrarCartasP(getBj().getManoP()) + "Y suman:\n" + getBj().contarCartas(getBj().getManoP()) + "\nSorry :)");
             System.out.println("**********************************************************");
         }
-        return ganador;
     }
+
+    @Override
+    public Jugada jugar() throws ImposibleJugar {
+        
+        Jugada cosa = new Jugada_BlackJack (apu,ganancias,bj.contarCartas(bj.getManoP()),bj.contarCartas(bj.getManoC()));
+        return cosa;
+         
+   }
+    
     
 
     public void hacerJuego() throws ErrorException {
@@ -100,26 +127,9 @@ public class JugarBlackJack {
         boolean banderaP = true;
         boolean banderaC = true;
 
-        //FASE DE APUESTA
-        //System.out.println("Introduce una apuesta:");
-    }        
-    /**
-     * Metodo que para realizar la apuesta sirviendo de union entre la parte grafica
-     * y la parte logica.
-     * @param apu se le pasa un double con la apuesta a realizar.
-     */
-    public void botonApostar(double apu){
         
-        try {
-           // System.out.println("Vas a apostar: " + apu);
-            user.retirarFondos(apu);
-           // System.out.println("*********************************************************");
-        } catch (TransaccionIncorrecta ex) {
-            Logger.getLogger(JugarBlackJack.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }
-        //SE REPARTEN LAS CARTAS Y SE MUESTRAN
-    
+    }        
+   
     public void repartirPrimera (){
         getBj().repartirCartasP();
         getBj().repartirCartasC();
@@ -248,7 +258,7 @@ public class JugarBlackJack {
                     user.añadirFondos(apu * ganador / 100);
                 }
             } catch (TransaccionIncorrecta ex) {
-                Logger.getLogger(JugarBlackJack.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Jugar_BlackJack.class.getName()).log(Level.SEVERE, null, ex);
             }
             //SI GANA LA BANCA
         } else {
@@ -270,4 +280,13 @@ public class JugarBlackJack {
     public void setBj(BlackJack bj) {
         this.bj = bj;
     }
+
+    /**
+     * @param apu the apu to set
+     */
+    public void setApu(double apu) {
+        this.apu = apu;
+    }
+
+   
 }

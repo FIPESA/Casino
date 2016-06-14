@@ -7,10 +7,11 @@ package Grafica;
 
 import Casino.Casino;
 import Casino.Jugada_BlackJack;
+import Exceptions.ImposibleJugar;
 import Exceptions.TransaccionIncorrecta;
 import Juegos.BlackJackGraf.BlackJack;
 import Juegos.BlackJackGraf.Carta;
-import Juegos.BlackJackGraf.JugarBlackJack;
+import Juegos.BlackJackGraf.Jugar_BlackJack;
 import Usuarios.*;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import javax.swing.JTextField;
  */
 public class BlackJackGrafica extends javax.swing.JFrame {
 
-    JugarBlackJack blacky;
+    Jugar_BlackJack blacky;
     int ganador = 100;
     boolean bandera = true;
     double apuesta;
@@ -40,14 +41,13 @@ public class BlackJackGrafica extends javax.swing.JFrame {
     Casino fipesa;
     String apu;
     User usuario;
-    
 
     /**
      * Creates new form BlackJackGrafica
      */
     public BlackJackGrafica(Casino fipesa, JFrame root) {
         initComponents();
-        blacky = new JugarBlackJack(fipesa.getUsuario());
+        blacky = new Jugar_BlackJack(fipesa.getUsuario());
         setLocationRelativeTo(null);
         setResizable(false);
         usuario = fipesa.getUsuario();
@@ -472,11 +472,12 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jPanelPlayer.updateUI();
 
     }
+
     /**
      * Reparte cartas al crupier y actualiza la GUI
      */
     private void repartirCartasC() {
-        
+
         this.blacky.getBj().pedirCartaCrupier();
         jPanelCrupier.removeAll();
         jPanelCrupier.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -496,109 +497,128 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jPanelCrupier.add(carta, new org.netbeans.lib.awtextra.AbsoluteConstraints(pos, 23, 100, 130));
             pos += 90;
         }
-        
 
         jPanelCrupier.updateUI();
 
     }
+
     /**
-     * La logica que sigue el crupier cuando se hace juego.
-     * Si tiene menos de 17 pide carta, sino no.
-     * Metodo no completo.
+     * La logica que sigue el crupier cuando se hace juego. Si tiene menos de 17
+     * pide carta, sino no. Realiza la operacion de añadir fondos en el monedero
+     * si el ganador es el jugador.
      */
-    public void logicaCrupier() {
-
-        apuesta = Double.parseDouble(this.jTextFieldApuesta.getText());
-        apu = Double.toString(apuesta * ganador / 100);
-        boolean banderaC = true;
-        boolean hecho = true;
-
-        while (banderaC) {
-            //SE COMPRUEBA QUE LA MANO DEL CRUPIER NO SE PASA DE 21
-            if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 0) {
-                ganador = 100;
-                banderaC = false;
-                jLabelGanancia.setText(apu);
-                apu = "";
-                jDialogGanador.setVisible(true);
-                hecho = false;
-                
-                //SI TIENE 17 O MENOS PIDE CARTA
-            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) < 17) {
-                repartirCartasC();
-
-            } else {
-                banderaC = false;
-            }
+    public void logicaCrupier() throws ImposibleJugar {
+        while (blacky.pedirCartasC()){
+            repartirCartasC();
             actualizarValorC();
         }
-
-        //LOGICA PARA ASIGNAR EL GANADOR
-        /* if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 1 && blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 0) {
-         ganador = 0;
-         } else if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoC()) < blacky.getBj().contarCartas(blacky.getBj().getManoP()) && blacky.getBj().getManoP().size() > 2) {
-         ganador = 100;
-         } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoP()) < blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
-         ganador = 0;
-         }*/
-        //SI EL GANADOR ES EL USUARIO
-        if (hecho) {
-
-            if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoC()) < blacky.getBj().contarCartas(blacky.getBj().getManoP()) && blacky.getBj().getManoP().size() > 2) {
-
-                ganador = 100;
-
+        ganador = blacky.logicaCrupier();
+        try {
+            blacky.ganador(ganador);
+            if (ganador !=0){
                 jLabelGanancia.setText(apu);
-                jDialogGanador.setVisible(true);
-                apu = "";
-
-                try {
-                    usuario.añadirFondos(apuesta);
-                    usuario.añadirFondos(apuesta * ganador / 100);
-                    actualizarValorD();
-                    apuesta = 0;
-                } catch (TransaccionIncorrecta ex) {
-                    jDialogTransaccionIncorrecta.setVisible(true);
-                }
-            } else if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 1 && blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 0) {
-                jDialogPerdedor.setVisible(true);
-            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoP()) < blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
-                jDialogPerdedor.setVisible(true);
-            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) == blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
-                ganador = 0;
-                jLabelGanancia.setText(apu);
-                jDialogGanador.setVisible(true);
-                apu = "";
-
-                try {
-
-                    usuario.añadirFondos(apuesta);
-                    actualizarValorD();
-                    apuesta = 0;
-                } catch (TransaccionIncorrecta ex) {
-                    jDialogTransaccionIncorrecta.setVisible(true);
-                }
-
+                jDialogGanador.setVisible(true);               
             } else {
                 jDialogPerdedor.setVisible(true);
             }
+        } catch (TransaccionIncorrecta ex) {
+            throw new ImposibleJugar("No se ha podido realizar la operacion");
         }
+
+        /*apuesta = Double.parseDouble(this.jTextFieldApuesta.getText());
+            apu = Double.toString(apuesta * ganador / 100);
+            boolean banderaC = true;
+            boolean hecho = true;
+            
+            while (banderaC) {
+            //SE COMPRUEBA QUE LA MANO DEL CRUPIER NO SE PASA DE 21
+            if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 0) {
+            ganador = 100;
+            banderaC = false;
+            jLabelGanancia.setText(apu);
+            apu = "";
+            jDialogGanador.setVisible(true);
+            hecho = false;
+            
+            //SI TIENE 17 O MENOS PIDE CARTA
+            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) < 17) {
+            repartirCartasC();
+            
+            } else {
+            banderaC = false;
+            }
+            actualizarValorC();
+            }
+            
+            //LOGICA PARA ASIGNAR EL GANADOR
+            /* if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 1 && blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 0) {
+            ganador = 0;
+            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoC()) < blacky.getBj().contarCartas(blacky.getBj().getManoP()) && blacky.getBj().getManoP().size() > 2) {
+            ganador = 100;
+            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoP()) < blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
+            ganador = 0;
+            }*/
+        //SI EL GANADOR ES EL USUARIO
+        /*if (hecho) {
+            
+            if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoC()) < blacky.getBj().contarCartas(blacky.getBj().getManoP()) && blacky.getBj().getManoP().size() > 2) {
+            
+            ganador = 100;
+            
+            jLabelGanancia.setText(apu);
+            jDialogGanador.setVisible(true);
+            apu = "";
+            
+            try {
+            usuario.añadirFondos(apuesta);
+            usuario.añadirFondos(apuesta * ganador / 100);
+            actualizarValorD();
+            apuesta = 0;
+            } catch (TransaccionIncorrecta ex) {
+            jDialogTransaccionIncorrecta.setVisible(true);
+            }
+            } else if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 1 && blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 0) {
+            jDialogPerdedor.setVisible(true);
+            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoP()) < blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
+            jDialogPerdedor.setVisible(true);
+            } else if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) == blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
+            ganador = 0;
+            jLabelGanancia.setText(apu);
+            jDialogGanador.setVisible(true);
+            apu = "";
+            
+            try {
+            
+            usuario.añadirFondos(apuesta);
+            actualizarValorD();
+            apuesta = 0;
+            } catch (TransaccionIncorrecta ex) {
+            jDialogTransaccionIncorrecta.setVisible(true);
+            }
+            
+            } else {
+            jDialogPerdedor.setVisible(true);
+            }
+            }*/
     }
+
     /**
      * Crea una jugada con los datos en memoria
+     *
      * @return la jugada en si
      */
     public Jugada_BlackJack setJugada() {
-        
+
         manoP = blacky.getBj().contarCartas(blacky.getBj().getManoP());
         manoC = blacky.getBj().contarCartas(blacky.getBj().getManoC());
-        jugada = new Jugada_BlackJack (apuesta, ganado, manoP, manoC);
+        jugada = new Jugada_BlackJack(apuesta, ganado, manoP, manoC);
         return getJugada();
-        
+
     }
+
     /**
-     * Crea una conexion a la base de datos y guarda la jugada directamente
-     * en la base de datos.
+     * Crea una conexion a la base de datos y guarda la jugada directamente en
+     * la base de datos.
      */
     public void guardarJugada() {
         jugada.guardar(usuario.getUsername());
@@ -616,15 +636,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jLabelDinero.setText(Double.toString(usuario.getMonedero().getFondos()));
     }
 
-    public void ganador() {
-        if (blacky.getBj().comprobar21(blacky.getBj().getManoC()) == 1 && blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 0) {
-            ganador = 0;
-        } else if (blacky.getBj().contarCartas(blacky.getBj().getManoP()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoC()) < blacky.getBj().contarCartas(blacky.getBj().getManoP()) && blacky.getBj().getManoP().size() > 2) {
-            ganador = 100;
-        } else if (blacky.getBj().contarCartas(blacky.getBj().getManoC()) <= 21 && blacky.getBj().contarCartas(blacky.getBj().getManoP()) < blacky.getBj().contarCartas(blacky.getBj().getManoC())) {
-            ganador = 0;
-        }
-    }
+
     private void jTextFieldApuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApuestaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldApuestaActionPerformed
@@ -638,7 +650,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         actualizarValorC();
         actualizarValorP();
         if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 1) {
-            ganador = 150;
+            ganador = 100;
             apu = Double.toString(apuesta * ganador / 100);
             jLabelGanancia.setText(apu);
             jButtonPedirCarta.setVisible(false);
@@ -680,43 +692,48 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jTextFieldApuesta.setEnabled(false);
         apuesta = Double.parseDouble(this.jTextFieldApuesta.getText());
         apu = Double.toString(apuesta * ganador / 100);
+        blacky.setApu(apuesta);
 
         try {
-            usuario.retirarFondos(Double.parseDouble(apu));
+            usuario.retirarFondos(apuesta);
+            jButtonApostar.setVisible(false);
+            this.repartirCartasP();
+            this.repartirCartasC();
+            this.repartirCartasP();
+            actualizarValorC();
+            actualizarValorP();
+            actualizarValorD();
+            if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 1) {
+
+                ganador = 150;
+                apu = Double.toString(apuesta * ganador / 100);
+                jLabelGanancia.setText(apu);
+                jDialogGanador.setVisible(true);
+
+                try {
+                    fipesa.getUsuario().añadirFondos(apuesta * ganador / 100);
+                    fipesa.getUsuario().añadirFondos(apuesta);
+                    guardarJugada();
+
+                } catch (TransaccionIncorrecta ex) {
+                    jDialogTransaccionIncorrecta.setVisible(true);
+                }
+                apuesta = 0;
+                actualizarValorD();
+                apu = "";
+
+            }
+
+            jButtonPedirCarta.setVisible(true);
+
         } catch (TransaccionIncorrecta ex) {
             jDialogTransaccionIncorrecta.setVisible(true);
             jTextFieldApuesta.setEnabled(true);
-
-        }
-
-        this.repartirCartasP();
-        this.repartirCartasC();
-        this.repartirCartasP();
-        actualizarValorC();
-        actualizarValorP();
-        actualizarValorD();
-        if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 1) {
-
-            ganador = 150;
-            apu = Double.toString(apuesta * ganador / 100);
-            jLabelGanancia.setText(apu);
-            jDialogGanador.setVisible(true);
-
-            try {
-                fipesa.getUsuario().añadirFondos(apuesta * ganador / 100);
-                fipesa.getUsuario().añadirFondos(apuesta);
-                guardarJugada();
-
-            } catch (TransaccionIncorrecta ex) {
-                jDialogTransaccionIncorrecta.setVisible(true);
-            }
             apuesta = 0;
-            actualizarValorD();
-            apu = "";
+            jTextFieldApuesta.setText("");
+            jButtonApostar.setVisible(true);
 
         }
-
-        jButtonPedirCarta.setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonApostarMouseClicked
@@ -726,7 +743,14 @@ public class BlackJackGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonPedirCartaActionPerformed
 
     private void jButtonPlantarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPlantarseMouseClicked
-        logicaCrupier();
+        try {
+            logicaCrupier();
+        } catch (ImposibleJugar ex) {
+            JOptionPane.showMessageDialog(rootPane, "Transaccion Incorrecta", "CUIDADO!!", JOptionPane.ERROR_MESSAGE);
+        }
+        actualizarValorC();
+        actualizarValorP();
+        actualizarValorD();
     }//GEN-LAST:event_jButtonPlantarseMouseClicked
 
     private void jButtonSalirGanadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonSalirGanadorMouseClicked
@@ -842,7 +866,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BlackJackGrafica(null,null).setVisible(true);
+                new BlackJackGrafica(null, null).setVisible(true);
             }
         });
     }

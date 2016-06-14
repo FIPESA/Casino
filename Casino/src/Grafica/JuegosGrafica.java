@@ -8,7 +8,7 @@ package Grafica;
 import Casino.Casino;
 import Exceptions.PremiumUpdateException;
 import Exceptions.TransaccionIncorrecta;
-import Juegos.BlackJackGraf.JugarBlackJack;
+import Juegos.BlackJackGraf.Jugar_BlackJack;
 import Usuarios.F2P;
 import Usuarios.*;
 import javax.swing.Icon;
