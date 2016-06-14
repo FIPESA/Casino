@@ -13,17 +13,22 @@ import Casino.*;
 import Juegos.Slots.Frutas;
 import Juegos.Slots.Jugar_Slots;
 import Juegos.Slots.Slots;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 
 
-public class SlotsGrafica extends javax.swing.JFrame {
+public class SlotsGrafica extends javax.swing.JFrame implements ActionListener{
     private Casino fipesa;
     private Jugar_Slots slots;
     private JFrame root;
+    Timer timer;
+    int indice;
    
     public SlotsGrafica(Casino casino, JFrame root) {
         initComponents();
@@ -43,6 +48,76 @@ public class SlotsGrafica extends javax.swing.JFrame {
         this.Fruta_6.setIcon(Frutas.SIETE.toIcon());
         this.Fruta_9.setIcon(Frutas.CEREZA.toIcon());
         this.String_Fondos.setText(Double.toString(fipesa.getUsuario().getMonedero().getFondos()));
+        timer = new Timer(20, this);
+    }
+    
+    private void principal(){        
+        Frutas fruta1;
+        Frutas fruta2;
+        Frutas fruta3;
+        Frutas fruta4;
+        Frutas fruta5;
+        Frutas fruta6;
+        Frutas fruta7;
+        Frutas fruta8;
+        Frutas fruta9;
+
+        if(slots.getSlots().getResultado1() == 0){
+                fruta1 = Slots.ROLLO[44];
+                fruta4 = slots.getSlots().getFruta1();
+                fruta7 = Slots.ROLLO[slots.getSlots().getResultado1()+1];
+            } else if(slots.getSlots().getResultado1() == 44){
+                fruta1 = Slots.ROLLO[slots.getSlots().getResultado1()-1];
+                fruta4 = slots.getSlots().getFruta1();
+                fruta7 = Slots.ROLLO[0];
+            } else {
+                fruta1 = Slots.ROLLO[slots.getSlots().getResultado1()-1];
+                fruta4 = slots.getSlots().getFruta1();
+                fruta7 = Slots.ROLLO[slots.getSlots().getResultado1()+1];                
+            }
+
+            if(slots.getSlots().getResultado2() == 0){
+                fruta2 = Slots.ROLLO[44];
+                fruta5 = slots.getSlots().getFruta2();
+                fruta8 = Slots.ROLLO[slots.getSlots().getResultado2()+1];
+            } else if(slots.getSlots().getResultado2() == 44){
+                fruta2 = Slots.ROLLO[slots.getSlots().getResultado2()-1];
+                fruta5 = slots.getSlots().getFruta2();
+                fruta8 = Slots.ROLLO[0];
+            } else {
+                fruta2 = Slots.ROLLO[slots.getSlots().getResultado2()-1];
+                fruta5 = slots.getSlots().getFruta2();
+                fruta8 = Slots.ROLLO[slots.getSlots().getResultado2()+1];
+            }
+
+            if(slots.getSlots().getResultado3() == 0){
+                fruta3 = Slots.ROLLO[44];
+                fruta6 = slots.getSlots().getFruta3();
+                fruta9 = Slots.ROLLO[slots.getSlots().getResultado3()+1];
+            } else if(slots.getSlots().getResultado3() == 44){
+                fruta3 = Slots.ROLLO[slots.getSlots().getResultado3()-1];
+                fruta6 = slots.getSlots().getFruta3();
+                fruta9 = Slots.ROLLO[0];
+            } else {
+                fruta3 = Slots.ROLLO[slots.getSlots().getResultado3()-1];
+                fruta6 = slots.getSlots().getFruta3();
+                fruta9 = Slots.ROLLO[slots.getSlots().getResultado3()+1];
+            }
+            this.Fruta_1.setIcon(fruta1.toIcon());
+            this.Fruta_2.setIcon(fruta2.toIcon());
+            this.Fruta_3.setIcon(fruta3.toIcon());
+            this.Fruta_4.setIcon(fruta4.toIcon());
+            this.Fruta_5.setIcon(fruta5.toIcon());
+            this.Fruta_6.setIcon(fruta6.toIcon());
+            this.Fruta_7.setIcon(fruta7.toIcon());
+            this.Fruta_8.setIcon(fruta8.toIcon());
+            this.Fruta_9.setIcon(fruta9.toIcon());
+
+            if(slots.comprobar()){
+                this.String_Texto.setText("PREMIO");
+                this.String_Premio.setText(Double.toString(slots.premios()));
+            }
+            
     }
 
     /**
@@ -138,6 +213,12 @@ public class SlotsGrafica extends javax.swing.JFrame {
             }
         });
 
+        String_Texto.setEditable(false);
+
+        String_Premio.setEditable(false);
+
+        String_Fondos.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -188,98 +269,21 @@ public class SlotsGrafica extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
+        this.jButton1.setEnabled(false);
         this.String_Premio.setText("");
         this.String_Texto.setText("");
         
-        try {
-            Random aleatorio = new Random();
-            Frutas fruta1;
-            Frutas fruta2;
-            Frutas fruta3;
-            Frutas fruta4;
-            Frutas fruta5;
-            Frutas fruta6;
-            Frutas fruta7;
-            Frutas fruta8;
-            Frutas fruta9;
-            
+        boolean bandera = true;
+        
+        try { 
             slots.jugar();
             this.String_Fondos.setText(Double.toString(fipesa.getUsuario().getMonedero().getFondos()));
             
-            if(slots.getSlots().getResultado1() == 0){
-                fruta1 = Slots.ROLLO[44];
-                fruta4 = slots.getSlots().getFruta1();
-                fruta7 = Slots.ROLLO[slots.getSlots().getResultado1()+1];
-            } else if(slots.getSlots().getResultado1() == 44){
-                fruta1 = Slots.ROLLO[slots.getSlots().getResultado1()-1];
-                fruta4 = slots.getSlots().getFruta1();
-                fruta7 = Slots.ROLLO[0];
-            } else {
-                fruta1 = Slots.ROLLO[slots.getSlots().getResultado1()-1];
-                fruta4 = slots.getSlots().getFruta1();
-                fruta7 = Slots.ROLLO[slots.getSlots().getResultado1()+1];                
-            }
-            
-            if(slots.getSlots().getResultado2() == 0){
-                fruta2 = Slots.ROLLO[44];
-                fruta5 = slots.getSlots().getFruta2();
-                fruta8 = Slots.ROLLO[slots.getSlots().getResultado2()+1];
-            } else if(slots.getSlots().getResultado2() == 44){
-                fruta2 = Slots.ROLLO[slots.getSlots().getResultado2()-1];
-                fruta5 = slots.getSlots().getFruta2();
-                fruta8 = Slots.ROLLO[0];
-            } else {
-                fruta2 = Slots.ROLLO[slots.getSlots().getResultado2()-1];
-                fruta5 = slots.getSlots().getFruta2();
-                fruta8 = Slots.ROLLO[slots.getSlots().getResultado2()+1];
-            }
-            
-            if(slots.getSlots().getResultado3() == 0){
-                fruta3 = Slots.ROLLO[44];
-                fruta6 = slots.getSlots().getFruta3();
-                fruta9 = Slots.ROLLO[slots.getSlots().getResultado3()+1];
-            } else if(slots.getSlots().getResultado3() == 44){
-                fruta3 = Slots.ROLLO[slots.getSlots().getResultado3()-1];
-                fruta6 = slots.getSlots().getFruta3();
-                fruta9 = Slots.ROLLO[0];
-            } else {
-                fruta3 = Slots.ROLLO[slots.getSlots().getResultado3()-1];
-                fruta6 = slots.getSlots().getFruta3();
-                fruta9 = Slots.ROLLO[slots.getSlots().getResultado3()+1];
-            }
-            
-//            for(int i=0;i<1000000;i++){
-//                this.Fruta_1.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_2.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_3.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_4.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_5.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_6.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_7.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_8.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-//                this.Fruta_9.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
-////                try {
-////                    Thread.sleep(1000);
-////                } catch (InterruptedException ex) {
-////                }
-//            }
-            
-            this.Fruta_1.setIcon(fruta1.toIcon());
-            this.Fruta_2.setIcon(fruta2.toIcon());
-            this.Fruta_3.setIcon(fruta3.toIcon());
-            this.Fruta_4.setIcon(fruta4.toIcon());
-            this.Fruta_5.setIcon(fruta5.toIcon());
-            this.Fruta_6.setIcon(fruta6.toIcon());
-            this.Fruta_7.setIcon(fruta7.toIcon());
-            this.Fruta_8.setIcon(fruta8.toIcon());
-            this.Fruta_9.setIcon(fruta9.toIcon());
-            
-            if(slots.comprobar()){
-                this.String_Texto.setText("PREMIO");
-                this.String_Premio.setText(Double.toString(slots.premios()));
-            }
+            this.indice = 0;
+            timer.start();
         } catch (ImposibleJugar ex) {
             JOptionPane.showMessageDialog(rootPane, "¡¡¡NO HAY FONDOS!!!", "¡AVISO!", JOptionPane.ERROR_MESSAGE);
+        } finally {            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -287,7 +291,12 @@ public class SlotsGrafica extends javax.swing.JFrame {
         this.setVisible(false);
         root.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+     
+    
+    
+    public void cambioIconos(){
         
+    }
     /**
      * @param args the command line arguments
      */
@@ -344,4 +353,25 @@ public class SlotsGrafica extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {        
+        if(this.indice <50){
+            Random aleatorio = new Random();
+            this.Fruta_1.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_2.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_3.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_4.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_5.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_6.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_7.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_8.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.Fruta_9.setIcon(slots.getSlots().ROLLO[aleatorio.nextInt(45)].toIcon());
+            this.indice++;
+        } else if (this.indice == 50){
+            this.principal();
+            this.jButton1.setEnabled(true);
+            timer.stop();
+        }
+    }
 }
