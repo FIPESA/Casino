@@ -10,8 +10,6 @@ import Casino.Jugada_BlackJack;
 import Exceptions.*;
 import Usuarios.*;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import Grafica.BlackJackGrafica;
 import Juegos.Jugable;
 
@@ -81,7 +79,7 @@ public class Jugar_BlackJack implements Jugable {
         }
         return ganador;
     }
-    public void ganador(int ganador)throws TransaccionIncorrecta{
+    public double ganador(int ganador)throws TransaccionIncorrecta{
         //SI EL GANADOR ES EL USUARIO
         if (ganador != 0) {
             //SI SE PRODUCE UN EMPATE
@@ -95,7 +93,7 @@ public class Jugar_BlackJack implements Jugable {
             
                 user.añadirFondos(apu);
                 ganancias = apu * ganador / 100;
-                if (ganador != 0 && apu < 0) {
+                if (ganador != 0 && apu > 0) {
                     
                     user.añadirFondos(apu * ganador / 100);
                     
@@ -107,6 +105,7 @@ public class Jugar_BlackJack implements Jugable {
             System.out.println("Gana la banca. Con esta mano: \n" + getBj().mostrarCartasP(getBj().getManoC()) + " que suma: \n " + getBj().contarCartas(getBj().getManoC()) + "\nLa tuya era esta: \n" + getBj().mostrarCartasP(getBj().getManoP()) + "Y suman:\n" + getBj().contarCartas(getBj().getManoP()) + "\nSorry :)");
             System.out.println("**********************************************************");
         }
+        return ganancias;
     }
 
     @Override

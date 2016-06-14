@@ -8,6 +8,7 @@ package Grafica;
 import Casino.Casino;
 import Casino.Jugada_BlackJack;
 import Exceptions.ImposibleJugar;
+import Exceptions.RentaException;
 import Exceptions.TransaccionIncorrecta;
 import Juegos.BlackJackGraf.BlackJack;
 import Juegos.BlackJackGraf.Carta;
@@ -53,12 +54,10 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         usuario = fipesa.getUsuario();
         this.root = root;
 
-        //botonazo = new JButton ("mierda");
-        //jPanelCrupier.add(botonazo);
-        //topPanel.setBackground(new Color(0, 122, 0));
         jPanelCrupier.setBackground(new Color(0, 122, 0));
         jPanelPlayer.setBackground(new Color(0, 122, 0));
         jButtonPedirCarta.setVisible(false);
+        jButtonPlantarse.setVisible(false);
 
         jLabelValorC.setText(Integer.toString(blacky.getBj().contarCartas(blacky.getBj().getManoC())));
         jLabelValorP.setText(Integer.toString(blacky.getBj().contarCartas(blacky.getBj().getManoP())));
@@ -511,15 +510,20 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         while (blacky.pedirCartasC()){
             repartirCartasC();
             actualizarValorC();
+            
         }
         ganador = blacky.logicaCrupier();
         try {
-            blacky.ganador(ganador);
+            ganado = blacky.ganador(ganador);
+            setJugada();
+            guardarJugada();
             if (ganador !=0){
                 jLabelGanancia.setText(apu);
                 jDialogGanador.setVisible(true);               
             } else {
                 jDialogPerdedor.setVisible(true);
+                setJugada();
+            guardarJugada();
             }
         } catch (TransaccionIncorrecta ex) {
             throw new ImposibleJugar("No se ha podido realizar la operacion");
@@ -651,6 +655,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         actualizarValorP();
         if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 1) {
             ganador = 100;
+            
             apu = Double.toString(apuesta * ganador / 100);
             jLabelGanancia.setText(apu);
             jButtonPedirCarta.setVisible(false);
@@ -661,9 +666,11 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                 usuario.añadirFondos(apuesta * ganador / 100);
                 usuario.añadirFondos(apuesta);
                 actualizarValorD();
-                apuesta = 0;
+                ganado = apuesta * ganador / 100;
                 apu = "";
-                guardarJugada();
+                setJugada();
+            guardarJugada();
+               
             } catch (TransaccionIncorrecta ex) {
                 jDialogTransaccionIncorrecta.setVisible(true);
             }
@@ -672,6 +679,9 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jButtonPedirCarta.setVisible(false);
             jButtonPlantarse.setVisible(false);
             jDialogPerdedor.setVisible(true);
+            setJugada();
+            guardarJugada();
+            
 
         }
         // TODO add your handling code here:
@@ -693,6 +703,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         apuesta = Double.parseDouble(this.jTextFieldApuesta.getText());
         apu = Double.toString(apuesta * ganador / 100);
         blacky.setApu(apuesta);
+        
 
         try {
             usuario.retirarFondos(apuesta);
@@ -711,8 +722,11 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                 jDialogGanador.setVisible(true);
 
                 try {
-                    fipesa.getUsuario().añadirFondos(apuesta * ganador / 100);
-                    fipesa.getUsuario().añadirFondos(apuesta);
+                    
+                    usuario.añadirFondos(apuesta * ganador / 100);
+                    usuario.añadirFondos(apuesta);
+                    ganado = apuesta * ganador / 100;
+                    setJugada();
                     guardarJugada();
 
                 } catch (TransaccionIncorrecta ex) {
@@ -725,6 +739,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             }
 
             jButtonPedirCarta.setVisible(true);
+            jButtonPlantarse.setVisible(true);
 
         } catch (TransaccionIncorrecta ex) {
             jDialogTransaccionIncorrecta.setVisible(true);
@@ -733,6 +748,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jTextFieldApuesta.setText("");
             jButtonApostar.setVisible(true);
 
+        } catch (RentaException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Te has pasado de la renga!", "AVISO", JOptionPane.ERROR_MESSAGE);
         }
 
         // TODO add your handling code here:
@@ -776,7 +793,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jPanelPlayer.removeAll();
         jPanelCrupier.updateUI();
         jPanelPlayer.updateUI();
-        jButtonPlantarse.setVisible(true);
+        jButtonPlantarse.setVisible(false);
+        jButtonPedirCarta.setVisible(false);
         jButtonApostar.setVisible(true);
         jTextFieldApuesta.setEnabled(true);
         jTextFieldApuesta.setEditable(true);
@@ -794,7 +812,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jPanelPlayer.removeAll();
         jPanelCrupier.updateUI();
         jPanelPlayer.updateUI();
-        jButtonPlantarse.setVisible(true);
+        jButtonPlantarse.setVisible(false);
+        jButtonPedirCarta.setVisible(false);
         jButtonApostar.setVisible(true);
         jTextFieldApuesta.setEnabled(true);
         jTextFieldApuesta.setEditable(true);
