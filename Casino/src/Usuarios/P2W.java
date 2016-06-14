@@ -81,7 +81,7 @@ public class P2W extends User{
      */
     public P2WSS UpgradeSubscription(int days) throws PremiumUpdateException, TransaccionIncorrecta{
         P2WSS user = new P2WSS(getUsername(), getPass(), getMonedero(), getName(), getLName1(), getLName2(), getEmail(), getReg_Date(), getRenta_num(), getBan_Date(), null, isAceptado());
-        user.getMonedero().retirarFondos(renta_num);
+        user.getMonedero().retirarFondos(days);
         user.UpdatePremium(days);
         OperacionesSQL.instancia().actualizarUsuario(user);
         return user;
