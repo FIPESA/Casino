@@ -1,5 +1,5 @@
 
-import Juegos.BlackJackGraf.JugarBlackJack;
+import Juegos.BlackJackGraf.Jugar_BlackJack;
 import Casino.Casino;
 import Exceptions.LoginException;
 import Exceptions.*;
@@ -139,7 +139,7 @@ public class MainFinal {
                     }                   
                     break;
                 case 3:
-                    JugarBlackJack a = new JugarBlackJack(fipesa.getUsuario());
+                    Jugar_BlackJack a = new Jugar_BlackJack(fipesa.getUsuario());
                     break;
                 case 0:
                     salir = false;

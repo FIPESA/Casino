@@ -6,7 +6,7 @@
 
 
 import Exceptions.ErrorException;
-import Juegos.BlackJackGraf.JugarBlackJack;
+import Juegos.BlackJackGraf.Jugar_BlackJack;
 import Usuarios.*;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ public class PruebaBlackJack {
 
     public static void main(String[] args) throws ErrorException {
 
-        JugarBlackJack blacky;
+        Jugar_BlackJack blacky;
         User user;
         Scanner entrada = new Scanner (System.in);
         String sn;
@@ -36,7 +36,7 @@ public class PruebaBlackJack {
 
         System.out.println("Empieza el juego.\n=============");
         while (bandera) {
-            blacky = new JugarBlackJack(user);
+            blacky = new Jugar_BlackJack(user);
             System.out.println("Tienes: " + user.getMonedero().getFondos());
             System.out.println("Quieres jugar otra vez?\nSI/NO.");
             sn = entrada.next();
