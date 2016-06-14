@@ -3,6 +3,8 @@ package Usuarios;
 import ConexionBD.OperacionesSQL;
 import java.util.*;
 import Exceptions.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class P2W extends User{
 
@@ -79,8 +81,9 @@ public class P2W extends User{
      */
     public P2WSS UpgradeSubscription(int days) throws PremiumUpdateException, TransaccionIncorrecta{
         P2WSS user = new P2WSS(getUsername(), getPass(), getMonedero(), getName(), getLName1(), getLName2(), getEmail(), getReg_Date(), getRenta_num(), getBan_Date(), null, isAceptado());
-        user.retirarFondos(days);
+        user.getMonedero().retirarFondos(renta_num);
         user.UpdatePremium(days);
+        OperacionesSQL.instancia().actualizarUsuario(user);
         return user;
     }
 
@@ -181,11 +184,17 @@ public class P2W extends User{
      * Retira fondos del monedero actulizando la bd
      * @param cantidad
      * @throws TransaccionIncorrecta 
+     * @throws Exceptions.RentaException 
      */
     @Override
-    public void retirarFondos(double cantidad) throws TransaccionIncorrecta {
-        this.getMonedero().retirarFondos(cantidad);
-        OperacionesSQL.instancia().actualizarFondos(this);
+    public void retirarFondos(double cantidad) throws TransaccionIncorrecta, RentaException {
+        boolean valido = OperacionesSQL.instancia().comprobarRenta(this);
+        if(valido){
+            this.getMonedero().retirarFondos(cantidad);
+            OperacionesSQL.instancia().actualizarFondos(this);
+        } else {
+            throw new RentaException("Renta Excedida");
+        }
     }
     
     /**
@@ -194,9 +203,10 @@ public class P2W extends User{
      * @throws TransaccionIncorrecta 
      */
     public void añadirFondosTransaccion (double cantidad) throws TransaccionIncorrecta{
-        this.añadirFondos(cantidad);
+        this.getMonedero().añadirFondos(cantidad);
         Transaccion trans = new Transaccion (cantidad);
         OperacionesSQL.instancia().AddTransaccion(trans, this);
+        OperacionesSQL.instancia().actualizarFondos(this);
     }
     
     /**
@@ -205,9 +215,10 @@ public class P2W extends User{
      * @throws TransaccionIncorrecta 
      */
     public void retirarFondosTransaccion (double cantidad) throws TransaccionIncorrecta{
-        this.retirarFondos(cantidad);
+        this.getMonedero().retirarFondos(cantidad);
         Transaccion trans = new Transaccion (-cantidad);
         OperacionesSQL.instancia().AddTransaccion(trans, this);
+        OperacionesSQL.instancia().actualizarFondos(this);
     }
     
     

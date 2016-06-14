@@ -2,7 +2,8 @@
 package Usuarios;
 
 
-import Exceptions.TransaccionIncorrecta;
+import Exceptions.*;
+
 
 public class F2P extends User {
 
@@ -18,7 +19,7 @@ public class F2P extends User {
     public void guardar() {}
 
     @Override
-    public void retirarFondos(double cantidad) throws TransaccionIncorrecta {        
+    public void retirarFondos(double cantidad) throws TransaccionIncorrecta, RentaException {        
     }
 
     @Override

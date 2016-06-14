@@ -191,6 +191,6 @@ public abstract class User implements Comparable<User>,Serializable{
     
     public abstract void añadirFondos(double cantidad) throws TransaccionIncorrecta;
     
-    public abstract void retirarFondos(double cantidad) throws TransaccionIncorrecta;
+    public abstract void retirarFondos(double cantidad) throws TransaccionIncorrecta, RentaException;
     
 }

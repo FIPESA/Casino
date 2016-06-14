@@ -291,12 +291,7 @@ public class SlotsGrafica extends javax.swing.JFrame implements ActionListener{
         this.setVisible(false);
         root.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-     
-    
-    
-    public void cambioIconos(){
-        
-    }
+
     /**
      * @param args the command line arguments
      */
