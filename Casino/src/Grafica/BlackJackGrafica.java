@@ -616,7 +616,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         manoP = blacky.getBj().contarCartas(blacky.getBj().getManoP());
         manoC = blacky.getBj().contarCartas(blacky.getBj().getManoC());
         jugada = new Jugada_BlackJack(apuesta, ganado, manoP, manoC);
-        return getJugada();
+        return jugada;
 
     }
 
@@ -749,7 +749,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             jButtonApostar.setVisible(true);
 
         } catch (RentaException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Te has pasado de la renga!", "AVISO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Te has pasado de la renta!", "AVISO", JOptionPane.ERROR_MESSAGE);
         }
 
         // TODO add your handling code here:
