@@ -1,4 +1,5 @@
 
+import ConexionBD.OperacionesSQL;
 import Exceptions.BDException;
 import Exceptions.TransaccionIncorrecta;
 import Exceptions.UserReadingException;
@@ -28,8 +29,8 @@ public class mainpruebaspaco {
         }
         P2W a ;
         try {
-            a = (P2W) ConexionBD.OperacionesSQL.instancia().leerUsuario("pepe", "yo");
-            System.out.println(a.getUsername()); 
+            a = (P2W) ConexionBD.OperacionesSQL.instancia().leerUsuario("pepe", "b");
+            OperacionesSQL.instancia().comprobarRenta(a);
         } catch (UserReadingException ex) {
             Logger.getLogger(mainpruebaspaco.class.getName()).log(Level.SEVERE, null, ex);
         }

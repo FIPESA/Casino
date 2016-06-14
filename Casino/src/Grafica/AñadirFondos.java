@@ -173,7 +173,6 @@ public class AñadirFondos extends javax.swing.JDialog {
 
     private void jbIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIngresarActionPerformed
         try {
-            usuario.añadirFondos(Double.parseDouble(jtfCantidad.getText()));
             usuario.añadirFondosTransaccion(Double.parseDouble(jtfCantidad.getText()));
             this.setVisible(false);
         } catch (TransaccionIncorrecta ex) {

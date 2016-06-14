@@ -29,12 +29,14 @@ public class VerMonedero extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         mostrar();
+        
     }
     
     
         public void mostrar(){
         tabla = new DefaultTableModel(OperacionesSQL.instancia().listadoTransacciones(fipesa.getUsuario().getUsername()),cabecera);
         jTable1.setModel(tabla);
+        jtfFondosActuales.setText(Double.toString(fipesa.getUsuario().getMonedero().getFondos()));
     }
         
     @Override
@@ -181,16 +183,15 @@ public class VerMonedero extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(44, 44, 44)
-                                        .addComponent(jbRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jbRetirar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(88, 88, 88))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jbAtras)
                                 .addGap(86, 86, 86)
-                                .addComponent(jbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jbCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 606, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -276,6 +277,7 @@ public class VerMonedero extends javax.swing.JFrame {
      
         AñadirFondos an = new AñadirFondos(this, true,fipesa.getUsuario());
         an.setVisible(true);
+        mostrar();
                 
     }//GEN-LAST:event_jbAñadirActionPerformed
 
@@ -283,6 +285,7 @@ public class VerMonedero extends javax.swing.JFrame {
        
         RetirarFondos rt = new RetirarFondos(this, true,fipesa.getUsuario());
         rt.setVisible(true);
+        mostrar();
         
     }//GEN-LAST:event_jbRetirarActionPerformed
 

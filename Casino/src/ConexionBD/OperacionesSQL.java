@@ -89,11 +89,10 @@ public class OperacionesSQL {
     public void AddTransaccion (Transaccion t, User uss){
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            System.out.println(sdf.format(t.getFechaActual()));
-            ConexionBD.instancia().getStatement().execute(
+            String sql = 
                     "insert into Transacciones (Fondos, Fecha, Username) "
-                  + "values("+Double.toString(t.getFondos())+"','" +sdf.format(t.getFechaActual())+"','"+uss.getUsername()+"');"
-            );
+                  + "values('"+Double.toString(t.getFondos())+"','" +sdf.format(t.getFechaActual())+"','"+uss.getUsername()+"');";
+            ConexionBD.instancia().getStatement().execute(sql);
         } catch (SQLException e){
             System.out.println("patata");
         }        
@@ -674,6 +673,20 @@ public class OperacionesSQL {
         }
         return transacciones;
         
+    }
+    
+    public boolean comprobarRenta(User uss){
+        try {
+            boolean valido;
+            String sql = "Select (count(Select Jugadas_Slots.Id_Jugada from Jugadas_Slots where Username='"+uss.getUsername()+"')*0.5)";
+            //SELECT ((count(Jugadas_Slots.Id_Jugada)*0.5)+sum(Jugadas_Blackjack.CantidadApostada)+sum( Jugadas_Ruleta.CantidadGanada)) from Jugadas_Blackjack,Jugadas_Ruleta,Jugadas_Slots;
+            ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(sql);
+            System.out.println(rs.getString(1));
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(OperacionesSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
     
     
