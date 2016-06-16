@@ -131,7 +131,7 @@ public class Casino {
     }
 
     public Jugar_Ruleta getRuleta() {
-        return ruleta;
+        return new Jugar_Ruleta(usuario);
     }
 
     public Jugar_Slots getSlots() {
