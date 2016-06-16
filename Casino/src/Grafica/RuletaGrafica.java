@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -45,6 +46,8 @@ public class RuletaGrafica extends javax.swing.JFrame {
         this.root = root;
         this.ruleta = fipesa.getRuleta();
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
         Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
         while(botones.hasMoreElements()){
             AbstractButton boton = botones.nextElement();
@@ -52,66 +55,7 @@ public class RuletaGrafica extends javax.swing.JFrame {
         }
     }
     
-    public boolean botonpulsado(){
-        boolean pulsado = false;
-        String nombre = null;
-        String valor;
-        Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
-        while(botones.hasMoreElements()){
-            AbstractButton boton = botones.nextElement();
-            if(boton.isSelected()){
-                nombre = boton.getName();
-                pulsado = true;
-            }
-        }
-        
-        if(pulsado){
-            valor = nombre.split("_")[1];
-
-            switch(valor){
-                case "rojo":
-                    this.numeros_apostados = Jugar_Ruleta.ROJO;
-                    break;
-                case "negro":
-                    this.numeros_apostados = Jugar_Ruleta.NEGRO;
-                    break;
-                case "par":
-                    this.numeros_apostados = Jugar_Ruleta.PAR;
-                    break;
-                case "impar":
-                    this.numeros_apostados = Jugar_Ruleta.IMPAR;
-                case "primeramitad":
-                    this.numeros_apostados = Jugar_Ruleta.MITAD_BAJA;
-                    break;
-                case "segundamitad":
-                    this.numeros_apostados = Jugar_Ruleta.MITAD_ALTA;
-                    break;
-                case "primeradocena":
-                    this.numeros_apostados = Jugar_Ruleta.DOCENA_1;
-                    break;
-                case "segundadocena":
-                    this.numeros_apostados = Jugar_Ruleta.DOCENA_2;
-                    break;
-                case "terceradocena":
-                    this.numeros_apostados = Jugar_Ruleta.DOCENA_3;
-                    break;
-                case "columna1":
-                    this.numeros_apostados = Jugar_Ruleta.COLUMNA_1;
-                    break;
-                case "columna2":
-                    this.numeros_apostados = Jugar_Ruleta.COLUMNA_2;
-                    break;
-                case "columna3":
-                    this.numeros_apostados = Jugar_Ruleta.COLUMNA_3;
-                    break;
-                default:
-                    this.numeros_apostados = new int[1];
-                    this.numeros_apostados[0] = Integer.parseInt(valor);
-                    break;
-            }
-        }
-        return pulsado;
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -186,6 +130,10 @@ public class RuletaGrafica extends javax.swing.JFrame {
         Ficha_10 = new javax.swing.JButton();
         Ficha_25 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        numero_ganador = new javax.swing.JTextField();
+        cantidad_ganada = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,8 +150,15 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_0.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_0.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_0.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_0ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_0);
         apuesta_0.setBounds(20, 70, 70, 80);
+        apuesta_0.getAccessibleContext().setAccessibleName("_0");
+        apuesta_0.getAccessibleContext().setAccessibleDescription("");
 
         buttonGroup1.add(apuesta_1);
         apuesta_1.setBorderPainted(false);
@@ -211,6 +166,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_1.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_1.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_1.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_1);
         apuesta_1.setBounds(100, 140, 50, 50);
 
@@ -220,6 +180,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_2.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_2.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_2.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_2);
         apuesta_2.setBounds(100, 80, 50, 50);
 
@@ -229,6 +194,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_3.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_3.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_3.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_3);
         apuesta_3.setBounds(100, 20, 50, 50);
 
@@ -238,6 +208,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_4.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_4.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_4.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_4ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_4);
         apuesta_4.setBounds(170, 140, 50, 50);
 
@@ -247,6 +222,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_5.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_5.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_5.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_5ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_5);
         apuesta_5.setBounds(160, 80, 50, 50);
 
@@ -256,6 +236,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_6.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_6.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_6.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_6ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_6);
         apuesta_6.setBounds(170, 20, 50, 50);
 
@@ -265,6 +250,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_7.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_7.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_7.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_7ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_7);
         apuesta_7.setBounds(230, 140, 50, 50);
 
@@ -274,6 +264,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_8.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_8.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_8.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_8ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_8);
         apuesta_8.setBounds(230, 80, 50, 50);
 
@@ -283,6 +278,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_9.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_9.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_9.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_9ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_9);
         apuesta_9.setBounds(230, 20, 50, 50);
 
@@ -292,6 +292,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_10.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_10.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_10.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_10ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_10);
         apuesta_10.setBounds(300, 140, 50, 50);
 
@@ -301,6 +306,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_11.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_11.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_11.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_11ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_11);
         apuesta_11.setBounds(290, 80, 50, 50);
 
@@ -310,6 +320,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_12.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_12.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_12.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_12ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_12);
         apuesta_12.setBounds(290, 20, 50, 50);
 
@@ -319,6 +334,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_13.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_13.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_13.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_13ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_13);
         apuesta_13.setBounds(360, 140, 50, 50);
 
@@ -328,6 +348,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_14.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_14.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_14.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_14ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_14);
         apuesta_14.setBounds(360, 80, 50, 50);
 
@@ -337,6 +362,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_15.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_15.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_15.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_15ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_15);
         apuesta_15.setBounds(360, 10, 50, 50);
 
@@ -346,6 +376,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_16.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_16.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_16.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_16ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_16);
         apuesta_16.setBounds(420, 140, 50, 50);
 
@@ -355,6 +390,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_17.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_17.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_17.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_17ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_17);
         apuesta_17.setBounds(420, 80, 50, 50);
 
@@ -364,6 +404,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_18.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_18.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_18.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_18ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_18);
         apuesta_18.setBounds(420, 20, 50, 50);
 
@@ -373,6 +418,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_19.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_19.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_19.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_19ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_19);
         apuesta_19.setBounds(490, 140, 50, 50);
 
@@ -382,6 +432,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_20.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_20.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_20.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_20ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_20);
         apuesta_20.setBounds(490, 80, 50, 50);
 
@@ -391,6 +446,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_21.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_21.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_21.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_21ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_21);
         apuesta_21.setBounds(490, 20, 50, 50);
 
@@ -400,6 +460,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_22.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_22.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_22.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_22ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_22);
         apuesta_22.setBounds(550, 140, 50, 50);
 
@@ -409,6 +474,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_23.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_23.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_23.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_23ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_23);
         apuesta_23.setBounds(550, 80, 50, 50);
 
@@ -418,6 +488,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_24.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_24.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_24.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_24ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_24);
         apuesta_24.setBounds(550, 10, 50, 50);
 
@@ -427,6 +502,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_25.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_25.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_25.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_25ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_25);
         apuesta_25.setBounds(610, 140, 50, 50);
 
@@ -436,6 +516,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_26.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_26.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_26.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_26ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_26);
         apuesta_26.setBounds(610, 80, 50, 50);
 
@@ -445,6 +530,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_27.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_27.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_27.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_27ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_27);
         apuesta_27.setBounds(610, 20, 50, 50);
 
@@ -454,6 +544,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_28.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_28.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_28.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_28ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_28);
         apuesta_28.setBounds(680, 140, 50, 50);
 
@@ -463,6 +558,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_29.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_29.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_29.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_29ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_29);
         apuesta_29.setBounds(680, 80, 50, 50);
 
@@ -472,6 +572,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_30.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_30.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_30.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_30ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_30);
         apuesta_30.setBounds(680, 20, 50, 50);
 
@@ -481,6 +586,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_31.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_31.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_31.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_31ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_31);
         apuesta_31.setBounds(740, 140, 50, 50);
 
@@ -490,8 +600,13 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_32.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_32.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_32.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_32ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_32);
-        apuesta_32.setBounds(750, 80, 50, 50);
+        apuesta_32.setBounds(740, 80, 50, 50);
 
         buttonGroup1.add(apuesta_33);
         apuesta_33.setBorderPainted(false);
@@ -499,6 +614,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_33.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_33.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_33.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_33ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_33);
         apuesta_33.setBounds(740, 20, 50, 50);
 
@@ -508,6 +628,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_34.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_34.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_34.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_34ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_34);
         apuesta_34.setBounds(810, 140, 50, 50);
 
@@ -517,6 +642,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_35.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_35.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_35.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_35ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_35);
         apuesta_35.setBounds(810, 80, 50, 50);
 
@@ -526,6 +656,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         apuesta_36.setMaximumSize(new java.awt.Dimension(50, 50));
         apuesta_36.setMinimumSize(new java.awt.Dimension(50, 50));
         apuesta_36.setPreferredSize(new java.awt.Dimension(50, 50));
+        apuesta_36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apuesta_36ActionPerformed(evt);
+            }
+        });
         jPanel2.add(apuesta_36);
         apuesta_36.setBounds(810, 10, 50, 50);
 
@@ -535,6 +670,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _primeradocena.setMaximumSize(new java.awt.Dimension(50, 50));
         _primeradocena.setMinimumSize(new java.awt.Dimension(50, 50));
         _primeradocena.setPreferredSize(new java.awt.Dimension(50, 50));
+        _primeradocena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _primeradocenaActionPerformed(evt);
+            }
+        });
         jPanel2.add(_primeradocena);
         _primeradocena.setBounds(200, 200, 50, 50);
 
@@ -544,6 +684,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _segundadocena.setMaximumSize(new java.awt.Dimension(50, 50));
         _segundadocena.setMinimumSize(new java.awt.Dimension(50, 50));
         _segundadocena.setPreferredSize(new java.awt.Dimension(50, 50));
+        _segundadocena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _segundadocenaActionPerformed(evt);
+            }
+        });
         jPanel2.add(_segundadocena);
         _segundadocena.setBounds(450, 200, 50, 50);
 
@@ -553,6 +698,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _terceradocena.setMaximumSize(new java.awt.Dimension(50, 50));
         _terceradocena.setMinimumSize(new java.awt.Dimension(50, 50));
         _terceradocena.setPreferredSize(new java.awt.Dimension(50, 50));
+        _terceradocena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _terceradocenaActionPerformed(evt);
+            }
+        });
         jPanel2.add(_terceradocena);
         _terceradocena.setBounds(720, 200, 50, 50);
 
@@ -562,6 +712,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _primeramitad.setMaximumSize(new java.awt.Dimension(50, 50));
         _primeramitad.setMinimumSize(new java.awt.Dimension(50, 50));
         _primeramitad.setPreferredSize(new java.awt.Dimension(50, 50));
+        _primeramitad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _primeramitadActionPerformed(evt);
+            }
+        });
         jPanel2.add(_primeramitad);
         _primeramitad.setBounds(140, 240, 50, 50);
 
@@ -571,6 +726,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _segundamitad.setMaximumSize(new java.awt.Dimension(50, 50));
         _segundamitad.setMinimumSize(new java.awt.Dimension(50, 50));
         _segundamitad.setPreferredSize(new java.awt.Dimension(50, 50));
+        _segundamitad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _segundamitadActionPerformed(evt);
+            }
+        });
         jPanel2.add(_segundamitad);
         _segundamitad.setBounds(780, 240, 50, 50);
 
@@ -580,6 +740,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _rojo.setMaximumSize(new java.awt.Dimension(50, 50));
         _rojo.setMinimumSize(new java.awt.Dimension(50, 50));
         _rojo.setPreferredSize(new java.awt.Dimension(50, 50));
+        _rojo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _rojoActionPerformed(evt);
+            }
+        });
         jPanel2.add(_rojo);
         _rojo.setBounds(390, 240, 50, 50);
 
@@ -589,6 +754,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _negro.setMaximumSize(new java.awt.Dimension(50, 50));
         _negro.setMinimumSize(new java.awt.Dimension(50, 50));
         _negro.setPreferredSize(new java.awt.Dimension(50, 50));
+        _negro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _negroActionPerformed(evt);
+            }
+        });
         jPanel2.add(_negro);
         _negro.setBounds(520, 240, 50, 50);
 
@@ -598,6 +768,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _par.setMaximumSize(new java.awt.Dimension(50, 50));
         _par.setMinimumSize(new java.awt.Dimension(50, 50));
         _par.setPreferredSize(new java.awt.Dimension(50, 50));
+        _par.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _parActionPerformed(evt);
+            }
+        });
         jPanel2.add(_par);
         _par.setBounds(260, 240, 50, 50);
 
@@ -607,6 +782,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _impar.setMaximumSize(new java.awt.Dimension(50, 50));
         _impar.setMinimumSize(new java.awt.Dimension(50, 50));
         _impar.setPreferredSize(new java.awt.Dimension(50, 50));
+        _impar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _imparActionPerformed(evt);
+            }
+        });
         jPanel2.add(_impar);
         _impar.setBounds(650, 240, 50, 50);
 
@@ -616,6 +796,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _columna1.setMaximumSize(new java.awt.Dimension(50, 50));
         _columna1.setMinimumSize(new java.awt.Dimension(50, 50));
         _columna1.setPreferredSize(new java.awt.Dimension(50, 50));
+        _columna1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _columna1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(_columna1);
         _columna1.setBounds(870, 140, 50, 50);
 
@@ -625,6 +810,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _columna2.setMaximumSize(new java.awt.Dimension(50, 50));
         _columna2.setMinimumSize(new java.awt.Dimension(50, 50));
         _columna2.setPreferredSize(new java.awt.Dimension(50, 50));
+        _columna2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _columna2ActionPerformed(evt);
+            }
+        });
         jPanel2.add(_columna2);
         _columna2.setBounds(870, 80, 50, 50);
 
@@ -634,6 +824,11 @@ public class RuletaGrafica extends javax.swing.JFrame {
         _columna3.setMaximumSize(new java.awt.Dimension(50, 50));
         _columna3.setMinimumSize(new java.awt.Dimension(50, 50));
         _columna3.setPreferredSize(new java.awt.Dimension(50, 50));
+        _columna3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                _columna3ActionPerformed(evt);
+            }
+        });
         jPanel2.add(_columna3);
         _columna3.setBounds(870, 10, 50, 50);
 
@@ -648,13 +843,14 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel1.add(jLabel1);
         jLabel1.setBounds(10, 11, 920, 45);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Documents\\NetBeansProjects\\casino\\Casino\\src\\resources\\Juegos\\tapeteee.jpg")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/ruleta-americana.jpg"))); // NOI18N
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(12, 78, 918, 301);
+        jLabel5.setBounds(12, 78, 920, 300);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -663,7 +859,7 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(553, 410, 330, 310);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Documents\\NetBeansProjects\\casino\\Casino\\src\\resources\\Juegos\\ruletiiii.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Juegos/ruletiiii.png"))); // NOI18N
         jPanel1.add(jLabel4);
         jLabel4.setBounds(470, 400, 457, 334);
 
@@ -730,6 +926,18 @@ public class RuletaGrafica extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(10, 410, 450, 140);
+
+        jLabel2.setText("NUMERO GANADOR:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(30, 580, 100, 30);
+
+        jLabel6.setText("CANTIDAD GANADA:");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(30, 620, 110, 30);
+        jPanel1.add(numero_ganador);
+        numero_ganador.setBounds(140, 580, 140, 30);
+        jPanel1.add(cantidad_ganada);
+        cantidad_ganada.setBounds(140, 620, 140, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -802,22 +1010,306 @@ public class RuletaGrafica extends javax.swing.JFrame {
     }//GEN-LAST:event_Ficha_25ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(this.buttonGroup1.getSelection().isSelected()){
-            ruleta.setApuesta(numeros_apostados);
-            ruleta.setDinero(cantidad_apostada);
-            try {
-                ruleta.jugar();
-                
-                
-                
-                
-            } catch (ImposibleJugar ex) {
-                Logger.getLogger(RuletaGrafica.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RentaException ex) {
-                Logger.getLogger(RuletaGrafica.class.getName()).log(Level.SEVERE, null, ex);
+        this.numero_ganador.setText("");
+        this.cantidad_ganada.setText("");
+        
+        ruleta.setApuesta(numeros_apostados);
+        ruleta.setDinero(cantidad_apostada);
+        try {
+            ruleta.jugar();
+            this.numero_ganador.setText(Integer.toString(ruleta.resultado()));
+            if(ruleta.comprobar()){
+                this.cantidad_ganada.setText(Double.toString(ruleta.multiplicador()*this.cantidad_apostada));
             }
+        } catch (ImposibleJugar ex) {
+            JOptionPane.showMessageDialog(this, "No se tienen fondos suficientes", "AVISO", JOptionPane.ERROR_MESSAGE);
+        } catch (RentaException ex) {
+            JOptionPane.showMessageDialog(this, "Has excedido el limite de tu renta", "AVISO", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void apuesta_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_0ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 0;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_0ActionPerformed
+
+    private void apuesta_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_1ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 1;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_1ActionPerformed
+
+    private void apuesta_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_2ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 2;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_2ActionPerformed
+
+    private void apuesta_3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_3ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 3;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_3ActionPerformed
+
+    private void apuesta_4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_4ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 4;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_4ActionPerformed
+
+    private void apuesta_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_5ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 5;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_5ActionPerformed
+
+    private void apuesta_6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_6ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 6;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_6ActionPerformed
+
+    private void apuesta_7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_7ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 7;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_7ActionPerformed
+
+    private void apuesta_8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_8ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 8;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_8ActionPerformed
+
+    private void apuesta_9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_9ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 9;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_9ActionPerformed
+
+    private void apuesta_10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_10ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 10;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_10ActionPerformed
+
+    private void apuesta_11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_11ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 11;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_11ActionPerformed
+
+    private void apuesta_12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_12ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 12;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_12ActionPerformed
+
+    private void apuesta_13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_13ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 13;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_13ActionPerformed
+
+    private void apuesta_14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_14ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 14;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_14ActionPerformed
+
+    private void apuesta_15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_15ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 15;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_15ActionPerformed
+
+    private void apuesta_16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_16ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 16;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_16ActionPerformed
+
+    private void apuesta_17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_17ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 17;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_17ActionPerformed
+
+    private void apuesta_18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_18ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 18;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_18ActionPerformed
+
+    private void apuesta_19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_19ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 19;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_19ActionPerformed
+
+    private void apuesta_20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_20ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 20;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_20ActionPerformed
+
+    private void apuesta_21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_21ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 21;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_21ActionPerformed
+
+    private void apuesta_22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_22ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 22;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_22ActionPerformed
+
+    private void apuesta_23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_23ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 23;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_23ActionPerformed
+
+    private void apuesta_24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_24ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 24;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_24ActionPerformed
+
+    private void apuesta_25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_25ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 25;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_25ActionPerformed
+
+    private void apuesta_26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_26ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 26;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_26ActionPerformed
+
+    private void apuesta_27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_27ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 27;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_27ActionPerformed
+
+    private void apuesta_28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_28ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 28;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_28ActionPerformed
+
+    private void apuesta_29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_29ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 29;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_29ActionPerformed
+
+    private void apuesta_30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_30ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 30;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_30ActionPerformed
+
+    private void apuesta_31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_31ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 31;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_31ActionPerformed
+
+    private void apuesta_32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_32ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 32;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_32ActionPerformed
+
+    private void apuesta_33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_33ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 33;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_33ActionPerformed
+
+    private void apuesta_34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_34ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 34;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_34ActionPerformed
+
+    private void apuesta_35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_35ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 35;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_35ActionPerformed
+
+    private void apuesta_36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apuesta_36ActionPerformed
+        this.numeros_apostados = new int[1];
+        this.numeros_apostados[0] = 36;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event_apuesta_36ActionPerformed
+
+    private void _primeradocenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__primeradocenaActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.DOCENA_1;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__primeradocenaActionPerformed
+
+    private void _segundadocenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__segundadocenaActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.DOCENA_2;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__segundadocenaActionPerformed
+
+    private void _terceradocenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__terceradocenaActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.DOCENA_3;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__terceradocenaActionPerformed
+
+    private void _columna1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__columna1ActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.COLUMNA_1;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__columna1ActionPerformed
+
+    private void _columna2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__columna2ActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.COLUMNA_2;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__columna2ActionPerformed
+
+    private void _columna3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__columna3ActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.COLUMNA_3;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__columna3ActionPerformed
+
+    private void _primeramitadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__primeramitadActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.MITAD_BAJA;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__primeramitadActionPerformed
+
+    private void _segundamitadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__segundamitadActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.MITAD_ALTA;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__segundamitadActionPerformed
+
+    private void _parActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__parActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.PAR;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__parActionPerformed
+
+    private void _imparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__imparActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.IMPAR;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__imparActionPerformed
+
+    private void _rojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__rojoActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.ROJO;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__rojoActionPerformed
+
+    private void _negroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event__negroActionPerformed
+        this.numeros_apostados = Jugar_Ruleta.NEGRO;
+        this.jButton1.setEnabled(true);
+    }//GEN-LAST:event__negroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -909,15 +1401,19 @@ public class RuletaGrafica extends javax.swing.JFrame {
     private javax.swing.JToggleButton apuesta_8;
     private javax.swing.JToggleButton apuesta_9;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField cantidad_ganada;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField numero_ganador;
     // End of variables declaration//GEN-END:variables
 }

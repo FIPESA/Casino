@@ -111,9 +111,10 @@ public class Jugar_Ruleta implements Jugable{
                 ganancia = this.dinero*this.multiplicador();
                 jugador.añadirFondos(ganancia);
             }
-            
-            jugada = new Jugada_Ruleta(apuesta, resultado(), dinero, ganancia);
-            jugada.guardar(this.jugador.getUsername());
+            if(!(jugador instanceof F2P)){
+                jugada = new Jugada_Ruleta(apuesta, resultado(), dinero, ganancia);
+                jugada.guardar(this.jugador.getUsername());
+            }
             
         } catch (TransaccionIncorrecta ex) {
             throw new ImposibleJugar("");

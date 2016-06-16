@@ -86,11 +86,6 @@ public class Jugar_Slots implements Jugable{
                 jugada = new Jugada_Slots(slots.getFruta1().toInt(), slots.getFruta2().toInt(), slots.getFruta3().toInt(), ganancia);
                 jugada.guardar(this.jugador.getUsername());
             }
-            
-            
-            Double prueba = 25.26;
-            
-            
         } catch (TransaccionIncorrecta ex) {
             throw new ImposibleJugar("Error al añadir o retirar fondos");
         }
