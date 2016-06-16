@@ -40,12 +40,20 @@ public class Jugar_Ruleta implements Jugable{
      * @param dinero
      * @param apuesta 
      */
-    public Jugar_Ruleta(User jugador, double dinero,  int[]apuesta) {
-        this.jugador = jugador;
-        this.dinero = dinero;
-        this.apuesta = apuesta;
+    public Jugar_Ruleta(User jugador) {
+        this.jugador = jugador;        
         this.ruleta = new Ruleta();       
     }
+
+    public void setDinero(double dinero) {
+        this.dinero = dinero;
+    }
+
+    public void setApuesta(int[] apuesta) {
+        this.apuesta = apuesta;
+    }
+    
+    
     
     /**
      * metodo que comprueba que el numero apostado es ganador

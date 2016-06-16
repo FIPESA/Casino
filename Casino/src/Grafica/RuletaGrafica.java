@@ -5,17 +5,112 @@
  */
 package Grafica;
 
+import Casino.Casino;
+import Exceptions.ImposibleJugar;
+import Exceptions.RentaException;
+import Juegos.Ruleta.Jugar_Ruleta;
+import java.awt.Cursor;
+import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.JFrame;
+import javax.swing.JToggleButton;
+
 /**
  *
  * @author alumno
  */
 public class RuletaGrafica extends javax.swing.JFrame {
+    
+    Casino fipesa;
+    Jugar_Ruleta ruleta;
+    JFrame root;
+    
+    
+    
+    double cantidad_apostada;
+    int[] numeros_apostados;
+    Icon icono_Ficha_1 = new javax.swing.ImageIcon(getClass().getResource("/resources/ruleta/Ficha 1.png"));
+    Icon icono_Ficha_5 = new javax.swing.ImageIcon(getClass().getResource("/resources/ruleta/Ficha 5.png"));
+    Icon icono_Ficha_10 = new javax.swing.ImageIcon(getClass().getResource("/resources/ruleta/Ficha 10.png"));
+    Icon icono_Ficha_25 = new javax.swing.ImageIcon(getClass().getResource("/resources/ruleta/Ficha 25.png"));
 
     /**
      * Creates new form RuletaGrafica
      */
-    public RuletaGrafica() {
+    public RuletaGrafica(Casino fipesa, JFrame root) {
+        this.fipesa = fipesa;
+        this.root = root;
+        this.ruleta = fipesa.getRuleta();
         initComponents();
+        Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
+        while(botones.hasMoreElements()){
+            AbstractButton boton = botones.nextElement();
+            boton.setEnabled(false);
+        }
+    }
+    
+    public boolean botonpulsado(){
+        boolean pulsado = false;
+        String nombre = null;
+        String valor;
+        Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
+        while(botones.hasMoreElements()){
+            AbstractButton boton = botones.nextElement();
+            if(boton.isSelected()){
+                nombre = boton.getName();
+                pulsado = true;
+            }
+        }
+        
+        if(pulsado){
+            valor = nombre.split("_")[1];
+
+            switch(valor){
+                case "rojo":
+                    this.numeros_apostados = Jugar_Ruleta.ROJO;
+                    break;
+                case "negro":
+                    this.numeros_apostados = Jugar_Ruleta.NEGRO;
+                    break;
+                case "par":
+                    this.numeros_apostados = Jugar_Ruleta.PAR;
+                    break;
+                case "impar":
+                    this.numeros_apostados = Jugar_Ruleta.IMPAR;
+                case "primeramitad":
+                    this.numeros_apostados = Jugar_Ruleta.MITAD_BAJA;
+                    break;
+                case "segundamitad":
+                    this.numeros_apostados = Jugar_Ruleta.MITAD_ALTA;
+                    break;
+                case "primeradocena":
+                    this.numeros_apostados = Jugar_Ruleta.DOCENA_1;
+                    break;
+                case "segundadocena":
+                    this.numeros_apostados = Jugar_Ruleta.DOCENA_2;
+                    break;
+                case "terceradocena":
+                    this.numeros_apostados = Jugar_Ruleta.DOCENA_3;
+                    break;
+                case "columna1":
+                    this.numeros_apostados = Jugar_Ruleta.COLUMNA_1;
+                    break;
+                case "columna2":
+                    this.numeros_apostados = Jugar_Ruleta.COLUMNA_2;
+                    break;
+                case "columna3":
+                    this.numeros_apostados = Jugar_Ruleta.COLUMNA_3;
+                    break;
+                default:
+                    this.numeros_apostados = new int[1];
+                    this.numeros_apostados[0] = Integer.parseInt(valor);
+                    break;
+            }
+        }
+        return pulsado;
     }
 
     /**
@@ -27,17 +122,70 @@ public class RuletaGrafica extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        apuesta_0 = new javax.swing.JToggleButton();
+        apuesta_1 = new javax.swing.JToggleButton();
+        apuesta_2 = new javax.swing.JToggleButton();
+        apuesta_3 = new javax.swing.JToggleButton();
+        apuesta_4 = new javax.swing.JToggleButton();
+        apuesta_5 = new javax.swing.JToggleButton();
+        apuesta_6 = new javax.swing.JToggleButton();
+        apuesta_7 = new javax.swing.JToggleButton();
+        apuesta_8 = new javax.swing.JToggleButton();
+        apuesta_9 = new javax.swing.JToggleButton();
+        apuesta_10 = new javax.swing.JToggleButton();
+        apuesta_11 = new javax.swing.JToggleButton();
+        apuesta_12 = new javax.swing.JToggleButton();
+        apuesta_13 = new javax.swing.JToggleButton();
+        apuesta_14 = new javax.swing.JToggleButton();
+        apuesta_15 = new javax.swing.JToggleButton();
+        apuesta_16 = new javax.swing.JToggleButton();
+        apuesta_17 = new javax.swing.JToggleButton();
+        apuesta_18 = new javax.swing.JToggleButton();
+        apuesta_19 = new javax.swing.JToggleButton();
+        apuesta_20 = new javax.swing.JToggleButton();
+        apuesta_21 = new javax.swing.JToggleButton();
+        apuesta_22 = new javax.swing.JToggleButton();
+        apuesta_23 = new javax.swing.JToggleButton();
+        apuesta_24 = new javax.swing.JToggleButton();
+        apuesta_25 = new javax.swing.JToggleButton();
+        apuesta_26 = new javax.swing.JToggleButton();
+        apuesta_27 = new javax.swing.JToggleButton();
+        apuesta_28 = new javax.swing.JToggleButton();
+        apuesta_29 = new javax.swing.JToggleButton();
+        apuesta_30 = new javax.swing.JToggleButton();
+        apuesta_31 = new javax.swing.JToggleButton();
+        apuesta_32 = new javax.swing.JToggleButton();
+        apuesta_33 = new javax.swing.JToggleButton();
+        apuesta_34 = new javax.swing.JToggleButton();
+        apuesta_35 = new javax.swing.JToggleButton();
+        apuesta_36 = new javax.swing.JToggleButton();
+        _primeradocena = new javax.swing.JToggleButton();
+        _segundadocena = new javax.swing.JToggleButton();
+        _terceradocena = new javax.swing.JToggleButton();
+        _primeramitad = new javax.swing.JToggleButton();
+        _segundamitad = new javax.swing.JToggleButton();
+        _rojo = new javax.swing.JToggleButton();
+        _negro = new javax.swing.JToggleButton();
+        _par = new javax.swing.JToggleButton();
+        _impar = new javax.swing.JToggleButton();
+        _columna1 = new javax.swing.JToggleButton();
+        _columna2 = new javax.swing.JToggleButton();
+        _columna3 = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        Ficha_1 = new javax.swing.JButton();
+        Ficha_5 = new javax.swing.JButton();
+        Ficha_10 = new javax.swing.JButton();
+        Ficha_25 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,13 +194,448 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel2.setOpaque(false);
         jPanel2.setLayout(null);
 
-        jToggleButton1.setBorderPainted(false);
-        jToggleButton1.setContentAreaFilled(false);
-        jToggleButton1.setMaximumSize(new java.awt.Dimension(45, 45));
-        jToggleButton1.setMinimumSize(new java.awt.Dimension(45, 45));
-        jToggleButton1.setPreferredSize(new java.awt.Dimension(45, 45));
-        jPanel2.add(jToggleButton1);
-        jToggleButton1.setBounds(10, 100, 45, 45);
+        buttonGroup1.add(apuesta_0);
+        apuesta_0.setBorderPainted(false);
+        apuesta_0.setContentAreaFilled(false);
+        apuesta_0.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        apuesta_0.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        apuesta_0.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_0.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_0.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_0);
+        apuesta_0.setBounds(20, 70, 70, 80);
+
+        buttonGroup1.add(apuesta_1);
+        apuesta_1.setBorderPainted(false);
+        apuesta_1.setContentAreaFilled(false);
+        apuesta_1.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_1.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_1.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_1);
+        apuesta_1.setBounds(100, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_2);
+        apuesta_2.setBorderPainted(false);
+        apuesta_2.setContentAreaFilled(false);
+        apuesta_2.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_2.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_2.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_2);
+        apuesta_2.setBounds(100, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_3);
+        apuesta_3.setBorderPainted(false);
+        apuesta_3.setContentAreaFilled(false);
+        apuesta_3.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_3.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_3.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_3);
+        apuesta_3.setBounds(100, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_4);
+        apuesta_4.setBorderPainted(false);
+        apuesta_4.setContentAreaFilled(false);
+        apuesta_4.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_4.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_4.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_4);
+        apuesta_4.setBounds(170, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_5);
+        apuesta_5.setBorderPainted(false);
+        apuesta_5.setContentAreaFilled(false);
+        apuesta_5.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_5.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_5.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_5);
+        apuesta_5.setBounds(160, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_6);
+        apuesta_6.setBorderPainted(false);
+        apuesta_6.setContentAreaFilled(false);
+        apuesta_6.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_6.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_6.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_6);
+        apuesta_6.setBounds(170, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_7);
+        apuesta_7.setBorderPainted(false);
+        apuesta_7.setContentAreaFilled(false);
+        apuesta_7.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_7.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_7.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_7);
+        apuesta_7.setBounds(230, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_8);
+        apuesta_8.setBorderPainted(false);
+        apuesta_8.setContentAreaFilled(false);
+        apuesta_8.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_8.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_8.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_8);
+        apuesta_8.setBounds(230, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_9);
+        apuesta_9.setBorderPainted(false);
+        apuesta_9.setContentAreaFilled(false);
+        apuesta_9.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_9.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_9.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_9);
+        apuesta_9.setBounds(230, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_10);
+        apuesta_10.setBorderPainted(false);
+        apuesta_10.setContentAreaFilled(false);
+        apuesta_10.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_10.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_10.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_10);
+        apuesta_10.setBounds(300, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_11);
+        apuesta_11.setBorderPainted(false);
+        apuesta_11.setContentAreaFilled(false);
+        apuesta_11.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_11.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_11.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_11);
+        apuesta_11.setBounds(290, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_12);
+        apuesta_12.setBorderPainted(false);
+        apuesta_12.setContentAreaFilled(false);
+        apuesta_12.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_12.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_12.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_12);
+        apuesta_12.setBounds(290, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_13);
+        apuesta_13.setBorderPainted(false);
+        apuesta_13.setContentAreaFilled(false);
+        apuesta_13.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_13.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_13.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_13);
+        apuesta_13.setBounds(360, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_14);
+        apuesta_14.setBorderPainted(false);
+        apuesta_14.setContentAreaFilled(false);
+        apuesta_14.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_14.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_14.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_14);
+        apuesta_14.setBounds(360, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_15);
+        apuesta_15.setBorderPainted(false);
+        apuesta_15.setContentAreaFilled(false);
+        apuesta_15.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_15.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_15.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_15);
+        apuesta_15.setBounds(360, 10, 50, 50);
+
+        buttonGroup1.add(apuesta_16);
+        apuesta_16.setBorderPainted(false);
+        apuesta_16.setContentAreaFilled(false);
+        apuesta_16.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_16.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_16.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_16);
+        apuesta_16.setBounds(420, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_17);
+        apuesta_17.setBorderPainted(false);
+        apuesta_17.setContentAreaFilled(false);
+        apuesta_17.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_17.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_17.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_17);
+        apuesta_17.setBounds(420, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_18);
+        apuesta_18.setBorderPainted(false);
+        apuesta_18.setContentAreaFilled(false);
+        apuesta_18.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_18.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_18.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_18);
+        apuesta_18.setBounds(420, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_19);
+        apuesta_19.setBorderPainted(false);
+        apuesta_19.setContentAreaFilled(false);
+        apuesta_19.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_19.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_19.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_19);
+        apuesta_19.setBounds(490, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_20);
+        apuesta_20.setBorderPainted(false);
+        apuesta_20.setContentAreaFilled(false);
+        apuesta_20.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_20.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_20.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_20);
+        apuesta_20.setBounds(490, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_21);
+        apuesta_21.setBorderPainted(false);
+        apuesta_21.setContentAreaFilled(false);
+        apuesta_21.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_21.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_21.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_21);
+        apuesta_21.setBounds(490, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_22);
+        apuesta_22.setBorderPainted(false);
+        apuesta_22.setContentAreaFilled(false);
+        apuesta_22.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_22.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_22.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_22);
+        apuesta_22.setBounds(550, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_23);
+        apuesta_23.setBorderPainted(false);
+        apuesta_23.setContentAreaFilled(false);
+        apuesta_23.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_23.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_23.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_23);
+        apuesta_23.setBounds(550, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_24);
+        apuesta_24.setBorderPainted(false);
+        apuesta_24.setContentAreaFilled(false);
+        apuesta_24.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_24.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_24.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_24);
+        apuesta_24.setBounds(550, 10, 50, 50);
+
+        buttonGroup1.add(apuesta_25);
+        apuesta_25.setBorderPainted(false);
+        apuesta_25.setContentAreaFilled(false);
+        apuesta_25.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_25.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_25.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_25);
+        apuesta_25.setBounds(610, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_26);
+        apuesta_26.setBorderPainted(false);
+        apuesta_26.setContentAreaFilled(false);
+        apuesta_26.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_26.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_26.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_26);
+        apuesta_26.setBounds(610, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_27);
+        apuesta_27.setBorderPainted(false);
+        apuesta_27.setContentAreaFilled(false);
+        apuesta_27.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_27.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_27.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_27);
+        apuesta_27.setBounds(610, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_28);
+        apuesta_28.setBorderPainted(false);
+        apuesta_28.setContentAreaFilled(false);
+        apuesta_28.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_28.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_28.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_28);
+        apuesta_28.setBounds(680, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_29);
+        apuesta_29.setBorderPainted(false);
+        apuesta_29.setContentAreaFilled(false);
+        apuesta_29.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_29.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_29.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_29);
+        apuesta_29.setBounds(680, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_30);
+        apuesta_30.setBorderPainted(false);
+        apuesta_30.setContentAreaFilled(false);
+        apuesta_30.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_30.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_30.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_30);
+        apuesta_30.setBounds(680, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_31);
+        apuesta_31.setBorderPainted(false);
+        apuesta_31.setContentAreaFilled(false);
+        apuesta_31.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_31.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_31.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_31);
+        apuesta_31.setBounds(740, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_32);
+        apuesta_32.setBorderPainted(false);
+        apuesta_32.setContentAreaFilled(false);
+        apuesta_32.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_32.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_32.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_32);
+        apuesta_32.setBounds(750, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_33);
+        apuesta_33.setBorderPainted(false);
+        apuesta_33.setContentAreaFilled(false);
+        apuesta_33.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_33.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_33.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_33);
+        apuesta_33.setBounds(740, 20, 50, 50);
+
+        buttonGroup1.add(apuesta_34);
+        apuesta_34.setBorderPainted(false);
+        apuesta_34.setContentAreaFilled(false);
+        apuesta_34.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_34.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_34.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_34);
+        apuesta_34.setBounds(810, 140, 50, 50);
+
+        buttonGroup1.add(apuesta_35);
+        apuesta_35.setBorderPainted(false);
+        apuesta_35.setContentAreaFilled(false);
+        apuesta_35.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_35.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_35.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_35);
+        apuesta_35.setBounds(810, 80, 50, 50);
+
+        buttonGroup1.add(apuesta_36);
+        apuesta_36.setBorderPainted(false);
+        apuesta_36.setContentAreaFilled(false);
+        apuesta_36.setMaximumSize(new java.awt.Dimension(50, 50));
+        apuesta_36.setMinimumSize(new java.awt.Dimension(50, 50));
+        apuesta_36.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(apuesta_36);
+        apuesta_36.setBounds(810, 10, 50, 50);
+
+        buttonGroup1.add(_primeradocena);
+        _primeradocena.setBorderPainted(false);
+        _primeradocena.setContentAreaFilled(false);
+        _primeradocena.setMaximumSize(new java.awt.Dimension(50, 50));
+        _primeradocena.setMinimumSize(new java.awt.Dimension(50, 50));
+        _primeradocena.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_primeradocena);
+        _primeradocena.setBounds(200, 200, 50, 50);
+
+        buttonGroup1.add(_segundadocena);
+        _segundadocena.setBorderPainted(false);
+        _segundadocena.setContentAreaFilled(false);
+        _segundadocena.setMaximumSize(new java.awt.Dimension(50, 50));
+        _segundadocena.setMinimumSize(new java.awt.Dimension(50, 50));
+        _segundadocena.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_segundadocena);
+        _segundadocena.setBounds(450, 200, 50, 50);
+
+        buttonGroup1.add(_terceradocena);
+        _terceradocena.setBorderPainted(false);
+        _terceradocena.setContentAreaFilled(false);
+        _terceradocena.setMaximumSize(new java.awt.Dimension(50, 50));
+        _terceradocena.setMinimumSize(new java.awt.Dimension(50, 50));
+        _terceradocena.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_terceradocena);
+        _terceradocena.setBounds(720, 200, 50, 50);
+
+        buttonGroup1.add(_primeramitad);
+        _primeramitad.setBorderPainted(false);
+        _primeramitad.setContentAreaFilled(false);
+        _primeramitad.setMaximumSize(new java.awt.Dimension(50, 50));
+        _primeramitad.setMinimumSize(new java.awt.Dimension(50, 50));
+        _primeramitad.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_primeramitad);
+        _primeramitad.setBounds(140, 240, 50, 50);
+
+        buttonGroup1.add(_segundamitad);
+        _segundamitad.setBorderPainted(false);
+        _segundamitad.setContentAreaFilled(false);
+        _segundamitad.setMaximumSize(new java.awt.Dimension(50, 50));
+        _segundamitad.setMinimumSize(new java.awt.Dimension(50, 50));
+        _segundamitad.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_segundamitad);
+        _segundamitad.setBounds(780, 240, 50, 50);
+
+        buttonGroup1.add(_rojo);
+        _rojo.setBorderPainted(false);
+        _rojo.setContentAreaFilled(false);
+        _rojo.setMaximumSize(new java.awt.Dimension(50, 50));
+        _rojo.setMinimumSize(new java.awt.Dimension(50, 50));
+        _rojo.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_rojo);
+        _rojo.setBounds(390, 240, 50, 50);
+
+        buttonGroup1.add(_negro);
+        _negro.setBorderPainted(false);
+        _negro.setContentAreaFilled(false);
+        _negro.setMaximumSize(new java.awt.Dimension(50, 50));
+        _negro.setMinimumSize(new java.awt.Dimension(50, 50));
+        _negro.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_negro);
+        _negro.setBounds(520, 240, 50, 50);
+
+        buttonGroup1.add(_par);
+        _par.setBorderPainted(false);
+        _par.setContentAreaFilled(false);
+        _par.setMaximumSize(new java.awt.Dimension(50, 50));
+        _par.setMinimumSize(new java.awt.Dimension(50, 50));
+        _par.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_par);
+        _par.setBounds(260, 240, 50, 50);
+
+        buttonGroup1.add(_impar);
+        _impar.setBorderPainted(false);
+        _impar.setContentAreaFilled(false);
+        _impar.setMaximumSize(new java.awt.Dimension(50, 50));
+        _impar.setMinimumSize(new java.awt.Dimension(50, 50));
+        _impar.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_impar);
+        _impar.setBounds(650, 240, 50, 50);
+
+        buttonGroup1.add(_columna1);
+        _columna1.setBorderPainted(false);
+        _columna1.setContentAreaFilled(false);
+        _columna1.setMaximumSize(new java.awt.Dimension(50, 50));
+        _columna1.setMinimumSize(new java.awt.Dimension(50, 50));
+        _columna1.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_columna1);
+        _columna1.setBounds(870, 140, 50, 50);
+
+        buttonGroup1.add(_columna2);
+        _columna2.setBorderPainted(false);
+        _columna2.setContentAreaFilled(false);
+        _columna2.setMaximumSize(new java.awt.Dimension(50, 50));
+        _columna2.setMinimumSize(new java.awt.Dimension(50, 50));
+        _columna2.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_columna2);
+        _columna2.setBounds(870, 80, 50, 50);
+
+        buttonGroup1.add(_columna3);
+        _columna3.setBorderPainted(false);
+        _columna3.setContentAreaFilled(false);
+        _columna3.setMaximumSize(new java.awt.Dimension(50, 50));
+        _columna3.setMinimumSize(new java.awt.Dimension(50, 50));
+        _columna3.setPreferredSize(new java.awt.Dimension(50, 50));
+        jPanel2.add(_columna3);
+        _columna3.setBounds(870, 10, 50, 50);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(10, 80, 920, 300);
@@ -69,18 +652,20 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(12, 78, 918, 301);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Documents\\NetBeansProjects\\casino\\Casino\\src\\resources\\Juegos\\ruletiiii.png")); // NOI18N
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(245, 409, 457, 334);
-
-        jButton1.setText("Girar Ruleta");
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(731, 465, 89, 23);
+        jButton1.setBounds(553, 410, 330, 310);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\alumno\\Documents\\NetBeansProjects\\casino\\Casino\\src\\resources\\Juegos\\ruletiiii.png")); // NOI18N
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(470, 400, 457, 334);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 0, 0));
@@ -93,13 +678,58 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(846, 720, 61, 25);
 
-        jButton3.setText("Apostar");
-        jPanel1.add(jButton3);
-        jButton3.setBounds(731, 517, 89, 23);
-
         jPanel3.setLayout(null);
+
+        Ficha_1.setText("jButton1");
+        Ficha_1.setBorderPainted(false);
+        Ficha_1.setContentAreaFilled(false);
+        Ficha_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Ficha_1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Ficha_1);
+        Ficha_1.setBounds(23, 33, 100, 100);
+
+        Ficha_5.setText("jButton1");
+        Ficha_5.setBorderPainted(false);
+        Ficha_5.setContentAreaFilled(false);
+        Ficha_5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Ficha_5ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Ficha_5);
+        Ficha_5.setBounds(130, 33, 100, 100);
+
+        Ficha_10.setText("jButton1");
+        Ficha_10.setBorderPainted(false);
+        Ficha_10.setContentAreaFilled(false);
+        Ficha_10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Ficha_10ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Ficha_10);
+        Ficha_10.setBounds(233, 33, 100, 100);
+
+        Ficha_25.setText("jButton1");
+        Ficha_25.setBorderPainted(false);
+        Ficha_25.setContentAreaFilled(false);
+        Ficha_25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Ficha_25ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(Ficha_25);
+        Ficha_25.setBounds(330, 33, 100, 100);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Juegos/Fichas.png"))); // NOI18N
+        jPanel3.add(jLabel3);
+        jLabel3.setBounds(10, 10, 440, 130);
+
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(10, 410, 300, 250);
+        jPanel3.setBounds(10, 410, 450, 140);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,10 +751,6 @@ public class RuletaGrafica extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      
         this.setVisible(false);
@@ -132,6 +758,66 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jf.setEnabled(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Ficha_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ficha_1ActionPerformed
+        this.cantidad_apostada = 1;
+        this.Ficha_1.setBorderPainted(true);
+        Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
+        while(botones.hasMoreElements()){
+            AbstractButton boton = botones.nextElement();
+            boton.setEnabled(true);
+            boton.setSelectedIcon(icono_Ficha_1);
+        }
+    }//GEN-LAST:event_Ficha_1ActionPerformed
+
+    private void Ficha_5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ficha_5ActionPerformed
+        this.cantidad_apostada = 5;
+        this.Ficha_5.setBorderPainted(true);
+        Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
+        while(botones.hasMoreElements()){
+            AbstractButton boton = botones.nextElement();
+            boton.setEnabled(true);
+            boton.setSelectedIcon(icono_Ficha_5);
+        }
+    }//GEN-LAST:event_Ficha_5ActionPerformed
+
+    private void Ficha_10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ficha_10ActionPerformed
+        this.cantidad_apostada = 10;
+        this.Ficha_10.setBorderPainted(true);Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
+        while(botones.hasMoreElements()){
+            AbstractButton boton = botones.nextElement();
+            boton.setEnabled(true);
+            boton.setSelectedIcon(icono_Ficha_10);
+        }
+    }//GEN-LAST:event_Ficha_10ActionPerformed
+
+    private void Ficha_25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ficha_25ActionPerformed
+        this.cantidad_apostada = 25;
+        this.Ficha_25.setBorderPainted(true);Enumeration<AbstractButton> botones = this.buttonGroup1.getElements();
+        while(botones.hasMoreElements()){
+            AbstractButton boton = botones.nextElement();
+            boton.setEnabled(true);
+            boton.setSelectedIcon(icono_Ficha_25);
+        }
+    }//GEN-LAST:event_Ficha_25ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(this.buttonGroup1.getSelection().isSelected()){
+            ruleta.setApuesta(numeros_apostados);
+            ruleta.setDinero(cantidad_apostada);
+            try {
+                ruleta.jugar();
+                
+                
+                
+                
+            } catch (ImposibleJugar ex) {
+                Logger.getLogger(RuletaGrafica.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RentaException ex) {
+                Logger.getLogger(RuletaGrafica.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,22 +849,75 @@ public class RuletaGrafica extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RuletaGrafica().setVisible(true);
+                new RuletaGrafica(null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Ficha_1;
+    private javax.swing.JButton Ficha_10;
+    private javax.swing.JButton Ficha_25;
+    private javax.swing.JButton Ficha_5;
+    private javax.swing.JToggleButton _columna1;
+    private javax.swing.JToggleButton _columna2;
+    private javax.swing.JToggleButton _columna3;
+    private javax.swing.JToggleButton _impar;
+    private javax.swing.JToggleButton _negro;
+    private javax.swing.JToggleButton _par;
+    private javax.swing.JToggleButton _primeradocena;
+    private javax.swing.JToggleButton _primeramitad;
+    private javax.swing.JToggleButton _rojo;
+    private javax.swing.JToggleButton _segundadocena;
+    private javax.swing.JToggleButton _segundamitad;
+    private javax.swing.JToggleButton _terceradocena;
+    private javax.swing.JToggleButton apuesta_0;
+    private javax.swing.JToggleButton apuesta_1;
+    private javax.swing.JToggleButton apuesta_10;
+    private javax.swing.JToggleButton apuesta_11;
+    private javax.swing.JToggleButton apuesta_12;
+    private javax.swing.JToggleButton apuesta_13;
+    private javax.swing.JToggleButton apuesta_14;
+    private javax.swing.JToggleButton apuesta_15;
+    private javax.swing.JToggleButton apuesta_16;
+    private javax.swing.JToggleButton apuesta_17;
+    private javax.swing.JToggleButton apuesta_18;
+    private javax.swing.JToggleButton apuesta_19;
+    private javax.swing.JToggleButton apuesta_2;
+    private javax.swing.JToggleButton apuesta_20;
+    private javax.swing.JToggleButton apuesta_21;
+    private javax.swing.JToggleButton apuesta_22;
+    private javax.swing.JToggleButton apuesta_23;
+    private javax.swing.JToggleButton apuesta_24;
+    private javax.swing.JToggleButton apuesta_25;
+    private javax.swing.JToggleButton apuesta_26;
+    private javax.swing.JToggleButton apuesta_27;
+    private javax.swing.JToggleButton apuesta_28;
+    private javax.swing.JToggleButton apuesta_29;
+    private javax.swing.JToggleButton apuesta_3;
+    private javax.swing.JToggleButton apuesta_30;
+    private javax.swing.JToggleButton apuesta_31;
+    private javax.swing.JToggleButton apuesta_32;
+    private javax.swing.JToggleButton apuesta_33;
+    private javax.swing.JToggleButton apuesta_34;
+    private javax.swing.JToggleButton apuesta_35;
+    private javax.swing.JToggleButton apuesta_36;
+    private javax.swing.JToggleButton apuesta_4;
+    private javax.swing.JToggleButton apuesta_5;
+    private javax.swing.JToggleButton apuesta_6;
+    private javax.swing.JToggleButton apuesta_7;
+    private javax.swing.JToggleButton apuesta_8;
+    private javax.swing.JToggleButton apuesta_9;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -272,7 +272,9 @@ public class JuegosGrafica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBrulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBrulActionPerformed
-        // TODO add your handling code here:
+        RuletaGrafica ruleta = new RuletaGrafica(fipesa, this);
+        ruleta.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jBrulActionPerformed
 
     private void jBatrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBatrasActionPerformed
