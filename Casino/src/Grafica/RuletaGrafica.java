@@ -847,7 +847,9 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(12, 78, 920, 300);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jButton1.setFont(new java.awt.Font("PT Serif", 0, 36)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Girar numero!!!!!!");
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setEnabled(false);
@@ -876,7 +878,6 @@ public class RuletaGrafica extends javax.swing.JFrame {
 
         jPanel3.setLayout(null);
 
-        Ficha_1.setText("jButton1");
         Ficha_1.setBorderPainted(false);
         Ficha_1.setContentAreaFilled(false);
         Ficha_1.addActionListener(new java.awt.event.ActionListener() {
@@ -887,7 +888,6 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel3.add(Ficha_1);
         Ficha_1.setBounds(23, 33, 100, 100);
 
-        Ficha_5.setText("jButton1");
         Ficha_5.setBorderPainted(false);
         Ficha_5.setContentAreaFilled(false);
         Ficha_5.addActionListener(new java.awt.event.ActionListener() {
@@ -898,7 +898,6 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel3.add(Ficha_5);
         Ficha_5.setBounds(130, 33, 100, 100);
 
-        Ficha_10.setText("jButton1");
         Ficha_10.setBorderPainted(false);
         Ficha_10.setContentAreaFilled(false);
         Ficha_10.addActionListener(new java.awt.event.ActionListener() {
@@ -909,7 +908,6 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jPanel3.add(Ficha_10);
         Ficha_10.setBounds(233, 33, 100, 100);
 
-        Ficha_25.setText("jButton1");
         Ficha_25.setBorderPainted(false);
         Ficha_25.setContentAreaFilled(false);
         Ficha_25.addActionListener(new java.awt.event.ActionListener() {

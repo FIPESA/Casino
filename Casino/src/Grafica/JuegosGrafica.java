@@ -100,13 +100,18 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jLabel2.setBounds(230, 50, 370, 40);
 
         jBrul.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jBrul.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/ruleta.png"))); // NOI18N
+        jBrul.setBorderPainted(false);
+        jBrul.setContentAreaFilled(false);
+        jBrul.setFocusPainted(false);
+        jBrul.setOpaque(false);
         jBrul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBrulActionPerformed(evt);
             }
         });
         jPanel1.add(jBrul);
-        jBrul.setBounds(570, 270, 80, 80);
+        jBrul.setBounds(40, 290, 150, 170);
 
         jBBj.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/black.png"))); // NOI18N
         jBBj.setBorder(null);
@@ -132,7 +137,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBSlots);
-        jBSlots.setBounds(90, 280, 140, 170);
+        jBSlots.setBounds(580, 180, 140, 170);
 
         jBatras.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jBatras.setText("Salir");
