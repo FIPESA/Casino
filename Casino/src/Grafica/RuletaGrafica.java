@@ -841,7 +841,7 @@ public class RuletaGrafica extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ruleta");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 11, 920, 45);
+        jLabel1.setBounds(10, 11, 920, 47);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/ruleta-americana.jpg"))); // NOI18N
         jPanel1.add(jLabel5);
@@ -942,16 +942,16 @@ public class RuletaGrafica extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -960,8 +960,7 @@ public class RuletaGrafica extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
      
         this.setVisible(false);
-        JuegosGrafica jf= new JuegosGrafica(null, this);
-        jf.setEnabled(true);
+        root.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
