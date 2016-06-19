@@ -49,6 +49,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
             jButton2.setEnabled(false);
             jButton3.setEnabled(false);
             jButton4.setEnabled(false);
+            jBatras1.setEnabled(true);
         }
         
     }
@@ -73,6 +74,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jBrul = new javax.swing.JButton();
         jBBj = new javax.swing.JButton();
         jBSlots = new javax.swing.JButton();
+        jBatras1 = new javax.swing.JButton();
         jBatras = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -87,7 +89,6 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setOpaque(false);
@@ -104,7 +105,6 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jBrul.setBorderPainted(false);
         jBrul.setContentAreaFilled(false);
         jBrul.setFocusPainted(false);
-        jBrul.setOpaque(false);
         jBrul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBrulActionPerformed(evt);
@@ -139,6 +139,18 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jPanel1.add(jBSlots);
         jBSlots.setBounds(580, 180, 140, 170);
 
+        jBatras1.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
+        jBatras1.setText("Atras");
+        jBatras1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jBatras1.setEnabled(false);
+        jBatras1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBatras1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jBatras1);
+        jBatras1.setBounds(130, 520, 80, 60);
+
         jBatras.setFont(new java.awt.Font("Tahoma", 3, 24)); // NOI18N
         jBatras.setText("Salir");
         jBatras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -148,7 +160,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jBatras);
-        jBatras.setBounds(20, 520, 80, 60);
+        jBatras.setBounds(30, 520, 80, 60);
 
         jButton1.setText("Ver stats");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -219,9 +231,9 @@ public class JuegosGrafica extends javax.swing.JFrame {
                             .addComponent(jTextField2)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -243,13 +255,13 @@ public class JuegosGrafica extends javax.swing.JFrame {
                             .addComponent(jButton2)
                             .addComponent(jButton3)
                             .addComponent(jButton4))
-                        .addGap(0, 17, Short.MAX_VALUE))
+                        .addGap(0, 3, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(440, 400, 354, 120);
+        jPanel2.setBounds(410, 400, 373, 120);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/Imagenes/fondoSelJuego.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -367,6 +379,11 @@ public class JuegosGrafica extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jBatras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBatras1ActionPerformed
+       this.setVisible(false);
+       root.setVisible(true);
+    }//GEN-LAST:event_jBatras1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -407,6 +424,7 @@ public class JuegosGrafica extends javax.swing.JFrame {
     private javax.swing.JButton jBBj;
     private javax.swing.JButton jBSlots;
     private javax.swing.JButton jBatras;
+    private javax.swing.JButton jBatras1;
     private javax.swing.JButton jBrul;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

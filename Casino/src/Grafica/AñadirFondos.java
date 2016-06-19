@@ -25,6 +25,7 @@ public class AñadirFondos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.usuario = (P2W)usuario;
+        setLocationRelativeTo(null);
         
     }
 
@@ -50,6 +51,7 @@ public class AñadirFondos extends javax.swing.JDialog {
         jLabel1.setText("AÑADIR FONDOS");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 51));
         jPanel1.setForeground(new java.awt.Color(51, 255, 255));
