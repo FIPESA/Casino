@@ -209,10 +209,10 @@ public class CasinoGraficaF2P extends javax.swing.JFrame {
     private void jBLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLoginActionPerformed
 
         Login logueo = new Login(this, true);
-        this.setEnabled(false);
+        
         logueo.setVisible(true);
 
-        this.setEnabled(true);
+        
 
         if(logueo.isValido()){
             if(logueo.getUsuario() instanceof P2WSS){

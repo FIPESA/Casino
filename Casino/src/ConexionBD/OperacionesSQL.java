@@ -476,7 +476,7 @@ public class OperacionesSQL {
                 for(int i=0;i<stringApostados.length;i++){
                     numerosApostados[i] = Integer.parseInt(stringApostados[i]);
                 }
-                jugadas.add(new Jugada_Ruleta(numerosApostados, rs.getInt(2), rs.getDouble(3), rs.getDouble(5), rs.getTimestamp(7)));
+                jugadas.add(new Jugada_Ruleta(numerosApostados, rs.getInt(2), rs.getDouble(3), rs.getDouble(5), rs.getTimestamp(4)));
             }
         } catch (SQLException ex) {
             System.out.println("Error en la base de datos");
@@ -610,7 +610,7 @@ public class OperacionesSQL {
             );
             
             while (rs.next()){                
-                jugadas.add(new Jugada_BlackJack(rs.getDouble("CantidadApostad"), rs.getDouble("CantidadGanada"), rs.getInt("ResCartasUser"), rs.getInt("ResCartasCrupier"), rs.getTimestamp("Fecha")));
+                jugadas.add(new Jugada_BlackJack(rs.getDouble("CantidadApostada"), rs.getDouble("CantidadGanada"), rs.getInt("ResCartasUser"), rs.getInt("ResCartasCrupier"), rs.getTimestamp("Fecha")));
             }
         } catch (SQLException ex) {
             System.out.println("Error en la base de datos");
