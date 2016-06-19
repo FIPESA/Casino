@@ -6,8 +6,10 @@
 
 package Juegos.BlackJackGraf;
 
+import static com.sun.webkit.graphics.WCImage.getImage;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,7 +30,8 @@ public class Carta extends JButton {
         this.simbolo = sim;
         this.tipo = tipo;
         this.indice = i;
-        imagen = new ImageIcon(indice + ".png");
+        URL img =  getClass().getResource("/resources/blackjack/"+indice+".png");
+        imagen = new ImageIcon(img);
          if (tipo == 'P' || tipo == 'T'){
             this.setBackground(Color.BLACK);
             this.setForeground(Color.WHITE);
