@@ -104,7 +104,6 @@ public class JuegosGrafica extends javax.swing.JFrame {
         jBrul.setBorderPainted(false);
         jBrul.setContentAreaFilled(false);
         jBrul.setFocusPainted(false);
-        jBrul.setOpaque(false);
         jBrul.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBrulActionPerformed(evt);

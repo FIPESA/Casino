@@ -100,7 +100,6 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButtonPedirCarta = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabelDinero = new javax.swing.JLabel();
         jButtonApostar = new javax.swing.JButton();
@@ -311,13 +310,6 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Limpiar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
         jLabel5.setText("Tienes:");
 
         jLabelDinero.setFont(new java.awt.Font("Arial Black", 0, 24)); // NOI18N
@@ -365,7 +357,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                                 .addGap(142, 142, 142)
                                 .addComponent(jButtonPlantarse, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanelPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
@@ -384,10 +376,6 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                                         .addComponent(jLabelValorP, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(35, 35, 35)))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,7 +388,7 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                         .addComponent(jLabelValorC, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(12, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanelCrupier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,14 +421,9 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                                 .addComponent(jButtonApostar)
                                 .addGap(36, 36, 36)
                                 .addComponent(jLabelDinero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton2)))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jButton2)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pack();
@@ -516,15 +499,19 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         ganador = blacky.logicaCrupier();
         try {
             ganado = blacky.ganador(ganador);
-            setJugada();
-            guardarJugada();
+            
             if (ganador !=0){
-                jLabelGanancia.setText(apu);
-                jDialogGanador.setVisible(true);               
-            } else {
-                jDialogPerdedor.setVisible(true);
                 setJugada();
             guardarJugada();
+                jLabelGanancia.setText(Double.toString(blacky.getApu()));
+                jDialogGanador.setVisible(true);               
+            } else {
+                ganado = 0;
+                setJugada();
+            guardarJugada();
+                jDialogPerdedor.setVisible(true);
+                
+                
             }
         } catch (TransaccionIncorrecta ex) {
             throw new ImposibleJugar("No se ha podido realizar la operacion");
@@ -656,7 +643,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
         actualizarValorP();
         if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 1) {
             ganador = 100;
-            
+            setJugada();
+            guardarJugada();
             apu = Double.toString(apuesta * ganador / 100);
             jLabelGanancia.setText(apu);
             jButtonPedirCarta.setVisible(false);
@@ -669,33 +657,24 @@ public class BlackJackGrafica extends javax.swing.JFrame {
                 actualizarValorD();
                 ganado = apuesta * ganador / 100;
                 apu = "";
-                setJugada();
-            guardarJugada();
+                
                
             } catch (TransaccionIncorrecta ex) {
                 jDialogTransaccionIncorrecta.setVisible(true);
             }
 
         } else if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 0) {
+             setJugada();
+            guardarJugada();
             jButtonPedirCarta.setVisible(false);
             jButtonPlantarse.setVisible(false);
             jDialogPerdedor.setVisible(true);
-            setJugada();
-            guardarJugada();
+           
             
 
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonPedirCartaMouseClicked
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        jPanelPlayer.removeAll();
-        jPanelPlayer.updateUI();   // TODO add your handling code here:
-        jDialogGanador.setLocationRelativeTo(null);
-        jDialogGanador.setVisible(true);
-        jDialogGanador.setTitle("hola?=");
-        jDialogTransaccionIncorrecta.setVisible(true);
-    }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButtonApostarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonApostarMouseClicked
 
@@ -716,7 +695,8 @@ public class BlackJackGrafica extends javax.swing.JFrame {
             actualizarValorP();
             actualizarValorD();
             if (blacky.getBj().comprobar21(blacky.getBj().getManoP()) == 1) {
-
+                setJugada();
+                guardarJugada();
                 ganador = 150;
                 apu = Double.toString(apuesta * ganador / 100);
                 jLabelGanancia.setText(apu);
@@ -892,7 +872,6 @@ public class BlackJackGrafica extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonApostar;
     private javax.swing.JButton jButtonContinuarJugandoG;

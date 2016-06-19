@@ -88,14 +88,14 @@ public class Jugar_BlackJack implements Jugable {
             }
             //SI GANA DE FORMA NORMAL
             System.out.println("Has GANADO!!!. \nCon esta mano: \n" + getBj().mostrarCartasP(getBj().getManoP()) + " y sumaban\n " + getBj().contarCartas(getBj().getManoP()) + "\nLa del crupier era esta: \n" + getBj().mostrarCartasP(getBj().getManoC())
-                    + " \ny sumaban:\n" + getBj().contarCartas(getBj().getManoC()) + "\nHas ganado : " + apu * ganador / 100);
+                    + " \ny sumaban:\n" + getBj().contarCartas(getBj().getManoC()) + "\nHas ganado : " + getApu() * ganador / 100);
             System.out.println("**********************************************************");
             
-                user.añadirFondos(apu);
-                ganancias = apu * ganador / 100;
-                if (ganador != 0 && apu > 0) {
+                user.añadirFondos(getApu());
+                ganancias = getApu() * ganador / 100;
+                if (ganador != 0 && getApu() > 0) {
                     
-                    user.añadirFondos(apu * ganador / 100);
+                    user.añadirFondos(getApu() * ganador / 100);
                     
                 }
             
@@ -111,7 +111,7 @@ public class Jugar_BlackJack implements Jugable {
     @Override
     public Jugada jugar() throws ImposibleJugar {
         
-        Jugada cosa = new Jugada_BlackJack (apu,ganancias,bj.contarCartas(bj.getManoP()),bj.contarCartas(bj.getManoC()));
+        Jugada cosa = new Jugada_BlackJack (getApu(),ganancias,bj.contarCartas(bj.getManoP()),bj.contarCartas(bj.getManoC()));
         return cosa;
          
    }
@@ -285,6 +285,13 @@ public class Jugar_BlackJack implements Jugable {
      */
     public void setApu(double apu) {
         this.apu = apu;
+    }
+
+    /**
+     * @return the apu
+     */
+    public double getApu() {
+        return apu;
     }
 
    
