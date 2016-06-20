@@ -25,6 +25,7 @@ public class DatosUserAdmin extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jTextField1.setEditable(false);
+        setLocationRelativeTo(null);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if(a instanceof P2WSS){
             P2WSS b = (P2WSS) a;
